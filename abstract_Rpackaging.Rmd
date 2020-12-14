@@ -14,23 +14,22 @@ Organised by the *Scientific Scripting Languages in Archaeology* special interes
 
 ## Abstract
 
-More and more researchers use the scripting language R to analyse their data. In working with the language, they develop functions and scripts to enhance their own personal workflow. To enable the sharing of code and thereby avoiding the re-development of already existing functions, creating possibilites for reproducibility and thus speeding scientific progess [@Schmidt2020], we offer a workshop to teach R-users how to develop R packages. This workshop is designed in tandem with the session "Tools for the Revolution: developing packages for scientific programming in archaeology" by the SIG SSLA.
+A growing number of researchers use the scripting language R for scientific data analysis. Many organise their code in scripts and functions to perform sequences of data manipulation, statistics and visualisation. Sometimes these workflows gain in complexity and it might become feasible to outsource core components into a dedicated R package. Packages are one of the best ways to make R code reproducible as they provide a well established structure to share functions, data and their documentation with other R-users. The vast numbers of packages by diverse developers on the Comprehensive R Archive Network (CRAN) indicate their popularity in the scientific community and they could very well become a pillar of scientific progress in archaeology [@Schmidt2020]. Indeed more and more packages are also being developed by and for archaeologists (e.g. http://open-archaeo.info).
 
-Packages are the "fundamental unit of sharable code" [@wickham_2020] within the R environment. They structure the way functions and their documentation can be shared with  others for easy integration, as shown by the vast numbers of packages by diverse developers on the Comprehensive R Archive Network, or CRAN. More and more packages are also being developed by and for archaeologists (e.g. <<http://open-archaeo.info/>>). We believe, though, even more archaeological R-users do not engage in package development, as they lack training and the learning curve *seems* steep.
+For CAA2021 we would like to offer a workshop to teach R-users how to develop R packages from their scripts. We believe that many archaeological R-users do not engage in package development as they lack training and the learning curve *seems* steep. We will try to fill this gap and offer a low-level introduction to R package development for users with basic R-skills.
 
-This workshop, organised on behalf of the CAA-SIG "Scientific Scripting Languages in Archaeology", will fill this gap and offer a low-level introduction to R package development for users with at least basic R-skills.
+This workshop is designed in tandem with the session "Tools for the Revolution: developing packages for scientific programming in archaeology" by the SIG SSLA.
 
-Therefore: 
+Therefore:
 
 Do you use the scientific scripting language R for your analyses? Do you, too, now have a number of script files flying about and don't know how to organise them?
 
 Join us and learn how to create an R-package!
 
-In this workshop we will focus on the main points in Hadley Wickhams book on package development (@wickham2020, https://r-pkgs.org/) and develop an example package together. This way workshop attendees will get to know a structured workflow for package development which will aid them in organizing their personal scripts afterwards. The gains of packaging existing functions are at least twofold: A package easily integrates several functions and will enable users to load them with just one `library()`-call and the sharing of code is thus much facilitated. 
+In this workshop we will focus on the main points in Hadley Wickhams book on packages [@wickham_2020] (https://r-pkgs.org) and create an example application together. Workshop attendees will get to know a structured workflow, which will aid them in organizing their personal scripts afterwards.
 
-Basic topics will include: Package structure, DESCRIPTION file and NAMESPACE, function documentation and development workflow. As every package should come with example data, we will show how to implement these into a package, as well as more detailed function explanations within a vignette. Testing routines and licensing for publication, e.g. on Git(hub, lab or similar) will enable attendees to share their work safely. 
+Basic topics will include: Package setup, function documentation and development cycle. As every package should come with example data, we will show how to implement these into a package, as well as more detailed function explanations within a vignette. Testing routines and licensing for publication, e.g. on Git(hub, lab or similar) will enable attendees to share their work safely. 
 
-Basic R knowledge is strongly recommended. Attendees should come with R >3.0 installed.
-
+Basic R knowledge is strongly recommended for the workshop. Software requirements will be announced to registered attendees later.
 
 ## References
