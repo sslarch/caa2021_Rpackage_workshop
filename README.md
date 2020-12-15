@@ -1,6 +1,6 @@
-# R Package Development Workshop
+# Developing R Packages
 
-(CAA2021 Cyprus)
+(CAA2021 Cyprus workshop)
 
 Workshop proposed by [CAA–SIG Scientific Scripting Languages in Archaeology](https://sslarch.github.io/) for [CAA2021, Cyprus](https://2021.caaconference.org/). 
 This workshop will offer a low-level introduction to R package development for users with at least basic R-skills.
