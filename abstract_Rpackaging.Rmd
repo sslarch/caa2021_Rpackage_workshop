@@ -2,7 +2,7 @@
 title: "Developing R packages"
 author:
 - Sophie Schmidt <<s.c.schmidt@uni-koeln.de>>, DAI
-- Petr Pajdla
+- Petr Pajdla <<petr.pajdla@protonmail.com>>, UAM MUNI
 - Clemens Schmid <<schmid@shh.mpg.de>>, MPI-SHH
 output: pdf_document
 bibliography: references.bib
