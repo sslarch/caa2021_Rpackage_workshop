@@ -5,14 +5,12 @@ output:
   beamer_presentation:
     slide_level: 2
     theme: "Singapore"
-    toc: true
 editor_options: 
   chunk_output_type: console
-
 ---
 
 ```{r setup, include=FALSE}
-#knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 # Functions
@@ -34,6 +32,8 @@ editor_options:
 ## Chaining functions together
 
 # Advanced topics
+
+## Default input values
 
 ## The ellipsis
 

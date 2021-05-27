@@ -1,0 +1,47 @@
+---
+title: "Advanced Topics"
+author: "Clemens Schmid"
+output: 
+  beamer_presentation:
+    slide_level: 2
+    theme: "Singapore"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+#knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Data
+
+## Data
+
+# Git/Github
+
+## Git/Github
+
+# Vignettes
+
+## Vignettes
+
+# Unit testing
+
+## Unit testing
+
+# CI/CD
+
+## CI/CD
+
+# OOP and custom types
+
+## OOP and custom types
+
+# Compiled code
+
+## Compiled code
+
+# CRAN
+
+## CRAN
+
