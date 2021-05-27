@@ -33,16 +33,6 @@ loop_res
 
 ### a possible solution
 
-input_data <- data.frame(
-  id = 1:26,
-  valueI = runif(26),
-  valueII = runif(26)
-)
-
-input_data$valueI[sample(1:26, 15)] <- NA
-
-cutoff_letter <- "G"
-
 specialplus <- function(x, y) {
   if (is.na(x)) {
     v1 <- 0
@@ -60,9 +50,9 @@ specialplus <- function(x, y) {
 `%specialplus%` <- specialplus
 
 my_function <- function(x, cutoff_letter) {
-  loop_res <- rep(NA, nrow(input_data))
-  for (i in seq_len(nrow(input_data))) {
-    current_row <- input_data[i,]
+  loop_res <- rep(NA, nrow(x))
+  for (i in seq_len(nrow(x))) {
+    current_row <- x[i,]
     if (current_row$id > cutoff_letter) {
       loop_res[i] <- current_row$valueI - current_row$valueII
     } else {
