@@ -1,0 +1,54 @@
+---
+title: "R functions"
+author: "Clemens Schmid"
+output: 
+  beamer_presentation:
+    slide_level: 2
+    theme: "Singapore"
+    toc: true
+editor_options: 
+  chunk_output_type: console
+
+---
+
+```{r setup, include=FALSE}
+#knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Functions
+
+## What is a function?
+
+# Functions in R
+
+## Implementation
+
+## Syntax
+
+## Namespaces
+
+## Input and Output
+
+## Types
+
+## Chaining functions together
+
+# Advanced topics
+
+## The ellipsis
+
+## Higher-order functions
+
+## Operators
+
+# Practical concerns
+
+## Function length and scope
+
+## Input argument validation
+
+## Error handling/messages
+
+# Exercise
+
+- Split a prepared script into functions
