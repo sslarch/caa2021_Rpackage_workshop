@@ -5,6 +5,8 @@ output:
   beamer_presentation:
     slide_level: 2
     theme: "Singapore"
+    includes:
+      in_header: preamble.tex
 editor_options: 
   chunk_output_type: console
 ---
@@ -67,7 +69,9 @@ return(z)
 
 ## Syntax
 
-We can reduce this: Functions don't need an explicit return statement. The value of the last statement is returned
+We can reduce this: 
+
+Functions don't need an explicit return statement. The value of the last statement is returned
 
 ```r
 myfunc <- function(x, y) { x + y }
@@ -94,7 +98,7 @@ Map(
 
 ## Syntax
 
-R 4.1 introduced even shorter Syntax for function definition
+R 4.1 introduced even shorter syntax for function definition
 
 ```r
 \(x, y) x + y
@@ -178,8 +182,6 @@ Disadvantages
 - Nasty error messages: No explicit input validation
 - No type validation at "compile"-time
 
-## Chaining functions together
-
 ## Namespaces
 
 Functions we did not define ourself always exist in some package
@@ -227,6 +229,8 @@ Alternatively we could use the `importFrom` statement in the `NAMESPACE` file
 ## Environments
 
 ## Operators
+
+## Chaining functions together
 
 # Practical concerns
 
