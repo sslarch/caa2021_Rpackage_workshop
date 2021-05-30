@@ -113,6 +113,73 @@ Map(
 
 But this syntax is very new and only works for the latest R versions
 
+## Input and Output
+
+Each function has zero, one or multiple input arguments, but only exactly one output argument
+
+Even a function without output returns `NULL`
+
+```r
+myfunc <- function(x, y) { cat(x) }
+```
+
+Usually the output of functions is immediatelly printed on the console. This can be prevented with `invisible` instead of `return`
+
+```r
+myfunc <- function(x, y) {
+  z <- x + y
+  invisible(z)
+}
+```
+
+## Types
+
+Every object in a programming environment has some type. R function have no way to being explicit about this: Dynamic type system
+
+```r
+myfunc <- function(x, y) { x + y }
+```
+
+We can use myfunc with every input the `+` operator is defined, so all kinds of numeric data types
+
+```r
+class(1.1) # "numeric"
+myfunc(1.1, 2.4) # 3.5
+```
+
+```r
+class(1L) # "integer"
+myfunc(1L, 2L) # 3
+```
+
+```r
+class(1i) # "complex"
+myfunc(1i, 2i) # 0+3i
+```
+
+## Types
+
+But it fails for other datatypes
+
+```r
+class("A") # "character"
+myfunc("A", "B") 
+# Error in x + y : 
+# non-numeric argument to binary operator
+```
+
+Advantages of dynamic typing
+
+- less verbose function definition
+- very flexible functions (functions often automatically work for multiple input types)
+
+Disadvantages
+
+- Nasty error messages: No explicit input validation
+- No type validation at "compile"-time
+
+## Chaining functions together
+
 ## Namespaces
 
 Functions we did not define ourself always exist in some package
@@ -148,16 +215,6 @@ stats::anova()
 ```
 
 Alternatively we could use the `importFrom` statement in the `NAMESPACE` file
-
-## Input and Output
-
-
-
-
-
-## Types
-
-## Chaining functions together
 
 # Advanced topics
 
