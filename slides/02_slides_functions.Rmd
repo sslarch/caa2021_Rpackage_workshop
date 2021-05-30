@@ -10,7 +10,7 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(eval = FALSE)
 ```
 
 # Functions
@@ -19,9 +19,99 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Functions in R
 
+R provides a several thousand functions in the core packages (base, graphics, stats, methods, ...)
+
+```r
+base::mean(c(1,2,3))
+```
+
+More functions are distributed through packages in a large ecosystem (CRAN, Github, ...)
+
+```r
+c14bazAAR::get_c14data("IRDD")
+```
+
+Developers and user can easily define own functions
+
+```r
+# function definition
+myfunc <- function(x, y) {
+  x + y
+}
+# function application
+myfunc(1,2)
+```
+
 ## Implementation
 
 ## Syntax
+
+R uses the following syntax for function definition
+
+```r
+myfunc <- function(x, y) {
+  z <- x + y
+  return(z)
+}
+```
+- Function name: `myfunc`
+- Arguments: `x` and `x`
+- Function body:
+
+```r
+z <- x + y
+return(z)
+```
+
+- Return value: `return(z)`
+
+## Syntax
+
+We can reduce this: Functions don't need an explicit return statement. The value of the last statement is returned
+
+```r
+myfunc <- function(x, y) { x + y }
+```
+
+## Syntax
+
+Functions also do not need a name: Lambda functions
+
+```r
+function(x, y) { x + y }
+```
+
+This is useful when we want to use a function only once for a very specific purpose (later: Higher Order functions)
+
+```r
+myvec1 <- c(1,2,3)
+myvec2 <- c(5,6,7)
+Map(
+  f = function(x, y) { x + y },
+  myvec, myvec2
+)
+```
+
+## Syntax
+
+R 4.1 introduced even shorter Syntax for function definition
+
+```r
+\(x, y) x + y
+```
+
+This makes for really elegant code
+
+```r
+myvec1 <- c(1,2,3)
+myvec2 <- c(5,6,7)
+Map(
+  f = \(x, y) x + y,
+  myvec1, myvec2
+)
+```
+
+But this syntax is very new and only works for the latest R versions
 
 ## Namespaces
 
@@ -38,6 +128,8 @@ knitr::opts_chunk$set(echo = FALSE)
 ## The ellipsis
 
 ## Higher-order functions
+
+## Environments
 
 ## Operators
 
