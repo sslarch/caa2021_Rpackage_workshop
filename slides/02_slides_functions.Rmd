@@ -115,7 +115,45 @@ But this syntax is very new and only works for the latest R versions
 
 ## Namespaces
 
+Functions we did not define ourself always exist in some package
+
+- For core R functions we can just access them
+
+```r
+mean()
+```
+
+- For all other packages we have to load the respective namespace to access their functions
+
+```r
+library(ggplot2)
+require(magrittr) # rarely used
+```
+
+- Or we contextualize the function explictly
+
+```r
+dplyr::mutate()
+c14bazAAR:::check_connection_to_url() # internal
+```
+
+## Namespaces
+
+When developing a package, this becomes less convenient:
+
+All functions need to be explicitly called, except they come from base R
+
+```r
+stats::anova()
+```
+
+Alternatively we could use the `importFrom` statement in the `NAMESPACE` file
+
 ## Input and Output
+
+
+
+
 
 ## Types
 
