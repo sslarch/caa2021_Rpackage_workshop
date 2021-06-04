@@ -247,6 +247,50 @@ calibrate <- function (
 
 ## The ellipsis
 
+The ellipsis `...` is a very special function argument, that can collect an arbitrary amount of unspecified arguments
+
+```r
+myfunc <- function(...) {
+  ell_args <- list(...)
+  z <- Reduce(`+`, ell_args, init = 0)
+  return(z)
+}
+```
+
+```r
+myfunc(1, 2) # 3
+myfunc(x = 1, y = 2) # 3
+myfunc(x = 1, y = 2, z = 5) # 8
+myfunc(1,2,3,4,5,6,7,8,9,10,11,12) # 78
+```
+
+```r
+myfunc(1, 2, NA) # NA
+```
+
+## The ellipsis
+
+The ellipsis can also be combined with normal arguments
+
+```r
+myfunc <- function(..., na.rm = T) {
+  ell_args <- list(...)
+  if (!na.rm) {
+    z <- Reduce(`+`, ell_args, init = 0)
+  } else {
+    ell_args_without_na <- ell_args[!is.na(ell_args)]
+    z <- Reduce(`+`, ell_args_without_na, init = 0)
+  }
+  z <- return(z)
+}
+```
+
+```r
+myfunc(1, 2, NA) # 3
+```
+
+That is equivalent to `base::sum()` (but very inefficient)
+
 ## Higher-order functions
 
 ## Environments
