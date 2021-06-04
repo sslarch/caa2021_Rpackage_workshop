@@ -1,0 +1,95 @@
+---
+title: "R package structure"
+author: "Sophie Schmidt"
+output: 
+  beamer_presentation:
+    slide_level: 2
+    theme: "Singapore"
+    includes:
+      in_header: preamble.tex
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+# R package structure
+
+## What is a package? 
+
+What makes a package a package?
+
+5 different "states" of a package:
+
+ - source =  directory of files with a specific structure
+ - bundled = compressed into a single file (.tar.gz = "tarball")
+ - binary = compressed in one file, platform specific (Mac: .tgz, Windows: .zip), used by install.packages()
+ - installed = binary package that’s been decompressed into a package library
+ - in-memory = after library()
+
+
+## Source Package
+
+![screenshot of github of readxl package](../figures/Screenshot_readxl_github.png)
+
+## elements of a source package
+
+## R/
+
+## DESCRIPTION
+
+## NAMESPACE
+
+## Workflow
+- Create the package
+- Build the package
+- Use the package
+
+## Transformations of components
+
+![](https://d33wubrfki0l68.cloudfront.net/260f30a58a962e1d0613f441560baf68ff5a5802/36dbd/diagrams/package-files.png)
+
+## Create the package
+
+### naming problems
+- name may contain numbers, letters and periods.
+- name must start with a letter and mustn't end with a period
+- recommendation: just don't use periods
+- check whether the name is availabe:
+
+```r
+library(available)
+
+available("doofus")
+``` 
+
+### make it so (mighty wizard usethis)
+
+```r
+usethis::create_package("path/to/package/pkgname")
+```
+This path should not lead to your lib or anywhere near your installed packages!
+
+## Mighty wizards: The devtools package
+
+
+## Build the package
+
+### Rbuildignore
+
+## Use the package
+
+## Dependency management
+
+## Using functions from other packages in your package (:: - also for functions from graphics and stats!, @importFrom)
+
+## The tidyverse and the pipe in R packages
+
+## Typical error messages and warnings
+
+
+
+## Task: Set up a minimal package, build and run it
+
