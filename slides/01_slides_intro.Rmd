@@ -1,0 +1,45 @@
+---
+title: "'Hello World' and Welcome"
+author: "Sophie Schmidt"
+output: 
+  beamer_presentation:
+    slide_level: 2
+    theme: "Singapore"
+    includes:
+      in_header: preamble.tex
+editor_options: 
+  chunk_output_type: console
+---
+
+# Welcome to the R package workshop
+
+## short introduction
+
+Please tell us in one sentence:
+- Who you are and what you hope to gain from this workshop
+
+## Reasons to create R packages
+
+- Sharing with my future self
+- Sharing with the scientific community
+- Reproducibility
+- "speeds up" science
+- Standards facilitate use by others
+
+## Let's dive in!
+
+1. function writing
+
+(5min break)
+
+2. package structure
+
+3. documentation!
+
+4. fluffy context
+
+(15min break)
+
+5. data
+
+6. advanced topics

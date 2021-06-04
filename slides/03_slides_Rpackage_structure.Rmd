@@ -15,8 +15,6 @@ editor_options:
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-# R package structure
-
 ## What is a package? 
 
 What makes a package a package?
@@ -49,7 +47,7 @@ What makes a package a package?
 
 ## Transformations of components
 
-![](https://d33wubrfki0l68.cloudfront.net/260f30a58a962e1d0613f441560baf68ff5a5802/36dbd/diagrams/package-files.png)
+<!-- ![](https://d33wubrfki0l68.cloudfront.net/260f30a58a962e1d0613f441560baf68ff5a5802/36dbd/diagrams/package-files.png) -->
 
 ## Create the package
 
