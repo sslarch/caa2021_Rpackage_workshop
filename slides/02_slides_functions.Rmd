@@ -222,6 +222,29 @@ Alternatively we could use the `importFrom` statement in the `NAMESPACE` file
 
 ## Default input values
 
+R functions can have default values for all of their arguments. That is a great way to simplify complicated interfaces for normal usecases
+
+```r
+myfunc <- function(x, y = 5) {
+  z <- x + y
+  return(z)
+}
+```
+
+```r
+myfunc(1) # 6
+myfunc(1, 2) # 3
+```
+
+Default arguments can even be used in the definition of other default arguments
+
+```r
+calibrate <- function (
+  x, choices = c("calrange"), sigma = 2, 
+  calCurves = rep("intcal20", nrow(x))
+) { ... }
+```
+
 ## The ellipsis
 
 ## Higher-order functions
