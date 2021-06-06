@@ -446,9 +446,9 @@ mtcars %>%
 General advice for using functions in scripts
 
 - Identify repeating code patterns in your script
-- If you do something **three or more times**, then it is worth putting it into a function
+- If you do something **three or more** times, then it is worth putting it into a function
 - Cover small differences between patterns with function arguments
-- One function should do only one thing, but complete atomization decreases readability
+- One function should only do one thing, but complete atomization decreases readability
 
 ## Scripts and Packages
 
@@ -463,6 +463,20 @@ read_data("path/to/file") %>%
 ```
 
 Not only your functions, of course
+
+## Communication with the user
+
+Package functions have (!) to communicate with the user (beyond the documentation)
+
+  - What is going? 
+  - Why did something fail?
+
+Interface options
+
+  - Check conditions and use `message()`, `warning()`, `stop()` to inform the user
+  - Write clear, helpful messages with advice how to solve an issue
+  - Show progress updates and progress bars for long operations
+  - Catch and handle errors that might occur in complex dependencies (`try`, `?conditions`)
 
 ## Input argument validation
 
@@ -485,8 +499,4 @@ myfunc(x = 5, y = "cookies")
 # not 'character'.
 ```
 
-## Error handling/messages
-
 # Exercise
-
-- Split a prepared script into functions
