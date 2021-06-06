@@ -32,16 +32,6 @@ Functions are code modules that perform a specific operation
 
 Functions are a major building block of software (R Packages)
 
-## How to write functions?
-
-1. Define the purpose of your functions
-    - What operation should be performed?
-2. Think about the function interface
-    - What goes into the function (input)?
-    - What should the function return (output)?
-3. Implement the function
-    - Which algorithm is capable to perform the desired operation?
-    
 # Functions in R
 
 ## Functions in R
@@ -399,7 +389,7 @@ Using an infix operator as a normal function
 `+`(3, 5) # 8
 ```
 
-3 is the LHS (Left hand side) and 5 the RHS (Right hand side) input of the `+` operator
+3 is the LHS (Left-hand side) and 5 the RHS (Right-hand side) input of the `+` operator
 
 ## Infix operators
 
@@ -423,16 +413,77 @@ All self-defined infix operators have to be fenced with `%`
 
 ## Chaining functions together
 
-## More topics
+The pipe `%>%` in the magrittr package is nothing but a clever infix operator
 
-- Environments
-- OOP in R (class systems)
+```r
+c(1,2,3) %>% mean()
+```
+
+It *pipes* the LHS *in* as the first argument of the function appearing on the RHS
+
+That allows for sequences of functions ("tidyverse style")
+
+```r
+mtcars %>%
+  dplyr::group_by(cyl) %>%
+  dplyr::summarise(mean_mpg = mean(mpg))
+```
 
 # Practical concerns
 
-## Function length and scope
+## How to write functions
+
+1. Define the purpose of your functions
+    - What operation should be performed?
+2. Think about the function interface
+    - What goes into the function (input)?
+    - What should the function return (output)?
+3. Implement the function
+    - Which algorithm is capable to perform the desired operation?
+
+## Functions in scripts
+
+General advice for using functions in scripts
+
+- Identify repeating code patterns in your script
+- If you do something **three or more times**, then it is worth putting it into a function
+- Cover small differences between patterns with function arguments
+- One function should do only one thing, but complete atomization decreases readability
+
+## Scripts and Packages
+
+In a package all code lives in functions, so workflows live in sequences of functions
+
+```r
+read_data("path/to/file") %>%
+  mypackage::manipulate_data_A() %>%
+  another_package::manipulate_data_B() %>%
+  mypackage::manipulate_data_C() %>%
+  mypackage::plot_data_B()
+```
+
+Not only your functions, of course
 
 ## Input argument validation
+
+As R is a dynamically typed language, a better user experience can be ensured with explicit input argument validation
+
+```r
+myfunc <- function(x, y) {
+  checkmate::assert_numeric(x, len = 1)
+  checkmate::assert_numeric(y, len = 1)
+  z <- x + y
+  return(z)
+}
+```
+
+Different packages simplify this, e.g. the `checkmate` package
+
+```r
+myfunc(x = 5, y = "cookies")
+# Assertion on 'y' failed: Must be of type 'numeric', 
+# not 'character'.
+```
 
 ## Error handling/messages
 
