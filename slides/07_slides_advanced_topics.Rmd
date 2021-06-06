@@ -13,10 +13,6 @@ editor_options:
 #knitr::opts_chunk$set(echo = FALSE)
 ```
 
-# Data
-
-## Data
-
 # Git/Github
 
 ## Git/Github
@@ -44,4 +40,3 @@ editor_options:
 # CRAN
 
 ## CRAN
-
