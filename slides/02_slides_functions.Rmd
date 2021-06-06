@@ -197,6 +197,8 @@ myfunc("A", "B")
 # non-numeric argument to binary operator
 ```
 
+## Types
+
 Advantages of dynamic typing
 
 - less verbose function definition
@@ -261,6 +263,8 @@ myfunc(1) # 6
 myfunc(1, 2) # 3
 ```
 
+## Default input values
+
 Default arguments can even be used in the definition of other default arguments
 
 ```r
@@ -318,11 +322,111 @@ That is equivalent to `base::sum()` (but very inefficient)
 
 ## Higher-order functions
 
-## Environments
+A higher-order function is a function that does one of the following:
 
-## Operators
+- takes one or more functions as arguments
+- returns a function as its result
+
+R supports this, so functions are "first class citizens" in R.
+
+Why would one want to do this?
+
+- make a function interface more powerful
+- Mapping, Folding, Moving windows...  
+
+## Higher-order functions
+
+Functions as an input argument
+
+```r
+myfunc <- function(vec, f) {
+  z <- f(vec)
+  return(z)
+}
+```
+
+```r
+myfunc(c(1, 2, 3), mean) # 2
+myfunc(c(1, 2, 3), sum) # 6
+```
+
+## Higher-order functions
+
+Functions as a function's input and output
+
+```r
+times_two <- function(x) { x*2 }
+```
+
+```r
+do_it_twice <- function(f) { 
+  function(x) { f(f(x)) }
+}
+```
+
+```r
+times_two(5) # 10
+do_it_twice(times_two)(5) # 20
+do_it_twice(do_it_twice(times_two))(5) # 80
+```
+
+## Infix operators
+
+R comes with a set of operators, some prefix, some infix, some postfix
+
+```
++, -, *, /, ^, &, |, :, ::, :::, $, =, <-, <<-, ==, 
+<, <=, >, >=, !=, ~, &&, ||, !, ?, @, :=, (, {, [, [[
+```
+
+Infix operators are special binary functions, so functions with two arguments, that can be written in between the function arguments
+
+```r
+3 + 5
+```
+
+R allows you to write infix operators as normal functions and to define own infix operators
+
+## Infix operators
+
+Using an infix operator as a normal function
+
+```r
+3 + 5 # 8
+```
+
+```r
+`+`(3, 5) # 8
+```
+
+3 is the LHS (Left hand side) and 5 the RHS (Right hand side) input of the `+` operator
+
+## Infix operators
+
+Defining your own infix operator
+
+```r
+`%horseplus%` <- function(x, y) {
+  z <- x + y
+  message("This horse likes bread.")
+  return(z)
+}
+```
+
+```r
+3 %horseplus% 5
+# This horse likes bread.
+# 10
+```
+
+All self-defined infix operators have to be fenced with `%`
 
 ## Chaining functions together
+
+## More topics
+
+- Environments
+- OOP in R (class systems)
 
 # Practical concerns
 
