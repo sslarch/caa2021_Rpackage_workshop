@@ -93,6 +93,38 @@ Continous integration means automatic testing and checking of code changes. Mult
 
 ## OOP and custom types
 
+**https://adv-r.hadley.nz/oo.html**
+
+R supports multiple different Object-oriented programming systems to implement packages with specific needs for their data types
+
+- Competing systems: S3, S4, RC, R6, R.oo, proto, ?
+- Many packages rely on custom S3, S4 or R6 classes
+- Many functions are in these packages are class methods, so they only work with specific input data types or work explicitly different for different input types
+- base R relies extensively on S3 classes
+
+## OOP and custom types
+
+```r
+?as.data.frame
+```
+
+```r
+## S3 method for class 'list'
+as.data.frame(
+  x, row.names = NULL, optional = FALSE, ...,
+  cut.names = FALSE, col.names = names(x), 
+  fix.empty.names = TRUE,
+  stringsAsFactors = default.stringsAsFactors()
+)
+
+## S3 method for class 'matrix'
+as.data.frame(
+  x, row.names = NULL, optional = FALSE,
+  make.names = TRUE, ...,
+  stringsAsFactors = default.stringsAsFactors()
+)
+```
+
 ## Compiled code
 
 ## CRAN
