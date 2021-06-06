@@ -13,9 +13,9 @@ editor_options:
 #knitr::opts_chunk$set(echo = FALSE)
 ```
 
-# Git/Github
-
 ## Git
+
+**https://r-pkgs.org/git.html**
 
 Git is a version control system that documents all changes to files in a directory
 
@@ -23,9 +23,13 @@ Git is a version control system that documents all changes to files in a directo
 - Browsing and rolling back to old stages
 - Safe collaboration on the same files
 
-Integration of Git and Github into an RStudio workflow: https://r-pkgs.org/git.html
+```r
+?usethis::use_git()
+```
 
 ## Github
+
+**https://github.com**
 
 Github is an online platform to store, publish and manage Git projects
 
@@ -35,11 +39,13 @@ Github is an online platform to store, publish and manage Git projects
 - Well implemented interaction with many coding web services
 - Social media features: A community of coding archaeologists
 
-https://github.com
-
-# Vignettes
+```r
+?usethis::use_github()
+```
 
 ## Vignettes
+
+**https://r-pkgs.org/vignettes.html**
 
 Vignettes are a special part of the R package documentation, that explains the workflows a package supports
 
@@ -52,24 +58,41 @@ vignette(topic = "introduction", package = "cowplot")
 - Less technical, more focussed on applications and usecases
 - Usually written in Rmarkdown
 
-Introduction and syntax: https://r-pkgs.org/vignettes.html
-
-# Unit testing
+```r
+?usethis::use_vignette()
+```
 
 ## Unit testing
 
-# CI/CD
+**https://r-pkgs.org/tests.html**
 
-## CI/CD
+A unit test is test code to check if a function returns what you expect given a certain input
 
-# OOP and custom types
+- Guarantee correctness of complex functions by testing them and their smaller parts
+- Facilitates refactoring and prevents you from accidentally breaking things
+- Test code serves as a concrete example for how your functions can be used
+
+```r
+?usethis::use_testthat()
+```
+
+## CI
+
+**https://github.com/r-lib/actions**
+
+Continous integration means automatic testing and checking of code changes. Multiple companies offer free web services for open source projects (Travis-CI, Gitlab, Github)
+
+- Each change to your project triggers a full test
+- Clean, virtual environments and multiple OS
+- Not just for testing, but also for any other operations (e.g. deploying a static website)
+- Should be used sparingly to save energy
+
+```r
+?usethis::use_github_action
+```
 
 ## OOP and custom types
 
-# Compiled code
-
 ## Compiled code
-
-# CRAN
 
 ## CRAN
