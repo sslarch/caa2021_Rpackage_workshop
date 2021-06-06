@@ -19,7 +19,32 @@ knitr::opts_chunk$set(eval = FALSE)
 
 ## What is a function?
 
+Functions are code modules that perform a specific operation
+
+- Self-contained
+    - Take in specific input and return output
+    - Runs in an own scope
+    - Black box: We don't have to understand them to use them
+- Reusable
+    - Can be called over and over again in different contexts
+    - Can be made more or less generic
+    - Can be made available to other developers
+
+Functions are a major building block of software (R Packages)
+
+## How to write functions?
+
+1. Define the purpose of your functions
+    - What operation should be performed?
+2. Think about the function interface
+    - What goes into the function (input)?
+    - What should the function return (output)?
+3. Implement the function
+    - Which algorithm is capable to perform the desired operation?
+    
 # Functions in R
+
+## Functions in R
 
 R provides a several thousand functions in the core packages (base, graphics, stats, methods, ...)
 
@@ -33,6 +58,8 @@ More functions are distributed through packages in a large ecosystem (CRAN, Gith
 c14bazAAR::get_c14data("IRDD")
 ```
 
+## Functions in R
+
 Developers and user can easily define own functions
 
 ```r
@@ -43,8 +70,6 @@ myfunc <- function(x, y) {
 # function application
 myfunc(1,2)
 ```
-
-## Implementation
 
 ## Syntax
 
