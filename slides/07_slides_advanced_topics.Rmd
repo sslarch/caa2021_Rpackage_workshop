@@ -15,11 +15,44 @@ editor_options:
 
 # Git/Github
 
-## Git/Github
+## Git
+
+Git is a version control system that documents all changes to files in a directory
+
+- Documentation of all steps in the development process
+- Browsing and rolling back to old stages
+- Safe collaboration on the same files
+
+Integration of Git and Github into an RStudio workflow: https://r-pkgs.org/git.html
+
+## Github
+
+Github is an online platform to store, publish and manage Git projects
+
+- Free and easy "backup" and publication
+- Low lock-in, because based on git
+- Manage collaborative working: Issues, Pull Requests
+- Well implemented interaction with many coding web services
+- Social media features: A community of coding archaeologists
+
+https://github.com
 
 # Vignettes
 
 ## Vignettes
+
+Vignettes are a special part of the R package documentation, that explains the workflows a package supports
+
+```r
+browseVignettes()
+vignette(topic = "introduction", package = "cowplot")
+```
+
+- Free form: Tutorial/Blog post/Book chapter/Paper
+- Less technical, more focussed on applications and usecases
+- Usually written in Rmarkdown
+
+Introduction and syntax: https://r-pkgs.org/vignettes.html
 
 # Unit testing
 
