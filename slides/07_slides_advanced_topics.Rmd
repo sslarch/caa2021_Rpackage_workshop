@@ -127,4 +127,28 @@ as.data.frame(
 
 ## Compiled code
 
-## CRAN
+**https://r-pkgs.org/src.html**
+
+R packages can incorporate code from compiled languages to speed up processes
+
+- C, C++, Fortran, ...
+- Orders-of-magnitude performance increases
+- Steep learning curve
+- C++ with Rcpp (https://adv-r.hadley.nz/rcpp.html)
+
+```r
+?usethis::use_rcpp()
+```
+
+## Releasing a package to CRAN
+
+**https://r-pkgs.org/release.html**
+
+At the very end of the initial package development process can be the submission to CRAN
+
+- Intensive checks on different test systems
+- The CRAN submission process
+- There are serious alternatives to a CRAN submission (https://ropensci.org/r-universe)
+
+`?devtools::release()`
+
