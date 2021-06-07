@@ -1,0 +1,36 @@
+---
+title: "Exercise package building"
+author: "Sophie C. Schmidt"
+date: "7 6 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Create your package!
+
+```{r}
+usethis::create_package("/path/to/myAMAZINGpackage")
+```
+
+R will tell you, what it does, it should look something like this: 
+✓ Creating '/path/to/myAMAZINGpackage/'
+✓ Setting active project to '/path/to/myAMAZINGpackage'
+✓ Creating 'R/'
+✓ Writing 'DESCRIPTION'
+... tells you what it writes in there
+✓ Writing 'NAMESPACE'
+✓ Writing 'myAMAZINGpackage.Rproj'
+✓ Adding '^myAMAZINGpackage\\.Rproj$' to '.Rbuildignore'
+✓ Adding '.Rproj.user' to '.gitignore'
+✓ Adding '^\\.Rproj\\.user$' to '.Rbuildignore'
+✓ Opening '/path/to/myAMAZINGpackage' in new RStudio session
+✓ Setting active project to '<no active project>'
+
+So you now have a new Rstudio project and the bare bones of a package.
+
+In Rstudio Cloud now make sure your build tools are up for package building:
+- upper horizontal menu -> Build -> Configure Build Tools -> in drop down menu "project build tools" choose *package*
+- a new tab on the upper right hand corner (next to environment) should appear

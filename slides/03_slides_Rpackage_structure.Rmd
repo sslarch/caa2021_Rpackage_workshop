@@ -15,9 +15,9 @@ editor_options:
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-## What is a package? 
+# What is a package? 
 
-What makes a package a package?
+## What makes a package a package?
 
 5 different "states" of a package:
 
@@ -30,19 +30,28 @@ What makes a package a package?
 ## What do we do with a package?
 
 create:
- - source =  directory of files with a specific structure
- build:
- - bundled = compressed into a single file (.tar.gz = "tarball")
- - binary = compressed in one file, platform specific (Mac: .tgz, Windows: .zip), used by install.packages()
- use:
- - installed = binary package that’s been decompressed into a package library
- - in-memory = after library()
+- source =  directory of files with a specific structure
+
+build:
+- bundled = compressed into a single file (.tar.gz = "tarball")
+- binary = compressed in one file, platform specific (Mac: .tgz, Windows: .zip), used by install.packages()
+ 
+use:
+- installed = binary package that’s been decompressed into a package library
+- in-memory = after library()
 
 ## Source Package
 
 ![screenshot of github of readxl package](../figures/Screenshot_readxl_github.png)
 
-## elements of a source package
+## most important elements of a source package
+- /R folder
+- DESCRIPTION file
+- NAMESPACE file
+- .Rbuildignore file
+
+- Rstudio users:
+  - usually an Rstudio project is created "alongside" the package
 
 ## R/
 - the "heart" of the package: all you beautiful functions live here
@@ -52,61 +61,109 @@ create:
   - often: one important function + its helpers
   - often: a family of functions
 - "utils.R" often contains "helpers" needed in several other functions
-- the code in here is run, when the package builds!
+- documentation of the function (see later)
+- the functions are defined, when the package builds --> make everything a function!
 
 ## DESCRIPTION
 - We <3 Metadata!
+  - human&machine readable
+  - shows up on CRAN
+  - it's what makes a package a package
 
-- bare bones:
+- a text file that follows DCF, the Debian control format
+- each line consists of a field name with a : (colon) behind it and the value
+
+## bare bones DESCRIPTION:
 ```r
-Package: mypackage
-Title: What The Package Does (one line, title case required)
-Version: 0.1
-Authors@R: person("First", "Last", email = "first.last@example.com",
-                  role = c("aut", "cre"))
-Description: What the package does (one paragraph)
-Depends: R (>= 3.1.0)
-License: What license is it under?
+Package: myexample
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R (parsed):
+    * First Last <first.last@example.com> [aut, cre] (<https://orcid.org/YOUR-ORCID-ID>)
+Description: What the package does (one paragraph).
+License: `use_mit_license()`, `use_gpl3_license()` or friends to
+    pick a license
+Encoding: UTF-8
 LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
 ```
+## most important DESCRIPTION parts
 
-`Title` is a one line description of the package, plain text (no markup), capitalised like a title, and NOT end in a period. Keep it short: listings will often truncate the title to 65 characters.
+`Title` is a one line description of the package, plain text (no markup), capitalised like a title, does NOT end in a period, < 65 characters
 
-`Description` is more detailed than the title, one paragraph. If your description spans multiple lines, each line must be no more than 80 characters wide. Indent subsequent lines with 4 spaces.
+`Description` is more detailed than the title, one paragraph. If your description spans multiple lines (each line <= 80 characters), indent subsequent lines with 4 spaces
 
 `Authors@R`: That's you and your collaborators. Think about your roles.
  - aut: author, cre: creator <- must have
  - ctb: contributors, cph: copyright holder, ... <- might have 
+ - one person may have more than one role, several ppl may have the same role
+ - give at least one email
 
+We will here more about licenses and Roxygen later!
 
-## Short excursion: dependencies
-### in DESCRIPTION
+# Dependencies
 
-```r
-Imports:
-    dplyr (>= 0.2),,
-    ggplot2
-```
-
-or:  
-
-```r
-Suggests:
-    dplyr (>= 0.2),,
-    ggplot2
-```
+## Dependencies management
+- we need to manage how to deal with our functions relying on other functions
+- Linux users now nod sagely please
+- everyone, who ever used library() or require() please nod sagely
+- in package building we need to do things differently than in scripts
 
 ### in CODE:
 - DO: `package::function()` 
-- DON'T `library()`
-- add packages to your DESCRIPTION using `usethis::use_package("pckgname")`
+- DON'T `library()` or `require()` !
+- add packages to your DESCRIPTION using `usethis::use_package("pkgname")`
+- use the namespace
+
+## in DESCRIPTION
+
+```r
+Imports:
+    dplyr (>= 0.2),
+    ggplot2
+```
+- imports MUST be there or your package won't work
+- will be installed if your package is installed and they are missing
+- specific version of a package in () behind the name should be minimum version    - (otherwise things get complicated fast)
+  - have a reason for the minimum version, ppl might have to install it
+  - giving a minimum version leads to better error messages for ppl who may not have the needed version installed
+
+```r
+Suggests:
+    dplyr (>= 0.2),
+    ggvis
+```
+- suggests means your package can use the package, but doesn't require them
+- e.g. packages for example data sets, to build the vignette, ...
 
 ## NAMESPACE
+- NAMESPACE is another txt just chilling in the project directory
+- listed are (most important):
+ - imports and importFrom: packages & functions you want to load
+example:
 
+```r
+# Generated by roxygen2 (4.0.2): do not edit by hand 
+importFrom(methods,setRefClass)
+```
+ - exports: functions you define to be used outside of your package (! important)
+example:
+```r
+# Generated by roxygen2 (4.0.2): do not edit by hand
+importFrom(methods,setRefClass)
+export(myfunc)
+``` 
+- just added underneath each other
+- usually done by Roxygen2 (see later)
 
+<!-- probably don't need this after all
 ## Transformations of components
 
-<!-- ![](https://d33wubrfki0l68.cloudfront.net/260f30a58a962e1d0613f441560baf68ff5a5802/36dbd/diagrams/package-files.png) -->
+![https://r-pkgs.org/](../figures/package-files.png)
+--> 
+
+# Pack the package!
 
 ## Create the package
 
@@ -114,7 +171,9 @@ Suggests:
 - name may contain numbers, letters and periods.
 - name must start with a letter and mustn't end with a period
 - recommendation: just don't use periods
-- check whether the name is availabe:
+- have fun and read the blog post here: *https://www.njtierney.com/post/2018/06/20/naming-things/* 
+
+- check whether the name is available:
 
 ```r
 library(available)
@@ -122,14 +181,40 @@ library(available)
 available("doofus")
 ``` 
 
-### make it so (mighty wizard usethis)
+## make it so (mighty wizard usethis)
 
 ```r
 usethis::create_package("path/to/package/amazingpkgname")
 ```
 This path should not lead to your lib or anywhere near your installed packages!
 
-## Mighty wizards: The devtools package
+- now we have the "most important parts" of a package: DESCRIPTION, R/, NAMESPACE
+
+## Add some functions and test them
+```{r}
+# with devtools attached and
+# working directory set to top-level of your source package ...
+
+load_all()
+
+# ... now experiment with the functions in your package
+```
+
+- load_all "sources" the script files safely for you
+- `source()` is not a good idea, because paths change during package development 
+- no need to :: your own package "under development"
+
+- “lather, rinse, repeat” cycle of package development:
+
+  1. Tweak a function
+  2. load_all()
+  3. Try out the change -> run a small example / test
+
+- in Rstudio you can do load_all() using:
+
+  - Keyboard shortcut: Cmd+Shift+L (macOS), Ctrl+Shift+L (Windows, Linux)
+  - Build pane’s More … menu
+  - Build > Load All
 
 
 ## Build the package
@@ -138,15 +223,11 @@ This path should not lead to your lib or anywhere near your installed packages!
 
 ## Use the package
 
-## Dependency management
-
-## Using functions from other packages in your package (:: - also for functions from graphics and stats!, @importFrom)
-
 ## The tidyverse and the pipe in R packages
 
 ## Typical error messages and warnings
 
-
-
 ## Task: Set up a minimal package, build and run it
 
+# excercise:
+- add another function, export in NAMESPACE, build, and use.
