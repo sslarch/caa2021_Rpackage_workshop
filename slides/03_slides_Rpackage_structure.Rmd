@@ -27,6 +27,16 @@ What makes a package a package?
  - installed = binary package that’s been decompressed into a package library
  - in-memory = after library()
 
+## What do we do with a package?
+
+create:
+ - source =  directory of files with a specific structure
+ build:
+ - bundled = compressed into a single file (.tar.gz = "tarball")
+ - binary = compressed in one file, platform specific (Mac: .tgz, Windows: .zip), used by install.packages()
+ use:
+ - installed = binary package that’s been decompressed into a package library
+ - in-memory = after library()
 
 ## Source Package
 
@@ -35,15 +45,64 @@ What makes a package a package?
 ## elements of a source package
 
 ## R/
+- the "heart" of the package: all you beautiful functions live here
+- each script ends on .R
+- what goes in one file?
+  - if a function is very large, it may live alone
+  - often: one important function + its helpers
+  - often: a family of functions
+- "utils.R" often contains "helpers" needed in several other functions
+- the code in here is run, when the package builds!
 
 ## DESCRIPTION
+- We <3 Metadata!
+
+- bare bones:
+```r
+Package: mypackage
+Title: What The Package Does (one line, title case required)
+Version: 0.1
+Authors@R: person("First", "Last", email = "first.last@example.com",
+                  role = c("aut", "cre"))
+Description: What the package does (one paragraph)
+Depends: R (>= 3.1.0)
+License: What license is it under?
+LazyData: true
+```
+
+`Title` is a one line description of the package, plain text (no markup), capitalised like a title, and NOT end in a period. Keep it short: listings will often truncate the title to 65 characters.
+
+`Description` is more detailed than the title, one paragraph. If your description spans multiple lines, each line must be no more than 80 characters wide. Indent subsequent lines with 4 spaces.
+
+`Authors@R`: That's you and your collaborators. Think about your roles.
+ - aut: author, cre: creator <- must have
+ - ctb: contributors, cph: copyright holder, ... <- might have 
+
+
+## Short excursion: dependencies
+### in DESCRIPTION
+
+```r
+Imports:
+    dplyr (>= 0.2),,
+    ggplot2
+```
+
+or:  
+
+```r
+Suggests:
+    dplyr (>= 0.2),,
+    ggplot2
+```
+
+### in CODE:
+- DO: `package::function()` 
+- DON'T `library()`
+- add packages to your DESCRIPTION using `usethis::use_package("pckgname")`
 
 ## NAMESPACE
 
-## Workflow
-- Create the package
-- Build the package
-- Use the package
 
 ## Transformations of components
 
@@ -66,7 +125,7 @@ available("doofus")
 ### make it so (mighty wizard usethis)
 
 ```r
-usethis::create_package("path/to/package/pkgname")
+usethis::create_package("path/to/package/amazingpkgname")
 ```
 This path should not lead to your lib or anywhere near your installed packages!
 
