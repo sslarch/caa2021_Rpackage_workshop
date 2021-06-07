@@ -1,0 +1,19 @@
+---
+title: "Fluffy context"
+author: "Petr Pajdla"
+output: 
+  beamer_presentation:
+    slide_level: 2
+    theme: "Singapore"
+    includes:
+      in_header: preamble.tex
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+# Fluffy...
+
