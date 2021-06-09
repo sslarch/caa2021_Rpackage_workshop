@@ -56,6 +56,7 @@ Developers and user can easily define own functions
 # function definition
 myfunc <- function(x, y) {
   x + y
+  return(z)
 }
 # function application
 myfunc(1,2)
@@ -82,9 +83,36 @@ return(z)
 
 - Return value: `return(z)`
 
+## Exercise
+
+Write a function that
+
+- takes a numeric vector without NA and 
+- returns the arithmetic mean of this input vector
+
+## Exercise
+
+Write a function that
+
+- takes a numeric vector without NA and 
+- returns the arithmetic mean of this input vector
+
+Possible solution:
+
+```r
+mymean <- function(x) {
+  z <- sum(x) / length(x)
+  return(z)
+}
+```
+
+```r
+mymean(c(1,2,3,4))
+```
+
 ## Syntax
 
-We can reduce this: 
+We can reduce the function definition: 
 
 Functions don't need an explicit return statement. The value of the last statement is returned
 
@@ -237,6 +265,115 @@ Alternatively we could use the `importFrom` statement in the `NAMESPACE` file
 
 # Advanced topics
 
+## Infix operators
+
+R comes with a set of operators, some prefix, some infix, some postfix
+
+```
++, -, *, /, ^, &, |, :, ::, :::, $, =, <-, <<-, ==, 
+<, <=, >, >=, !=, ~, &&, ||, !, ?, @, :=, (, {, [, [[
+```
+
+Infix operators are special binary functions, so functions with two arguments, that can be written in between the function arguments
+
+```r
+3 + 5
+```
+
+R allows you to write infix operators as normal functions and to define own infix operators
+
+## Infix operators
+
+Using an infix operator as a normal function
+
+```r
+3 + 5 # 8
+```
+
+```r
+`+`(3, 5) # 8
+```
+
+3 is the LHS (Left-hand side) and 5 the RHS (Right-hand side) input of the `+` operator
+
+## Infix operators
+
+Defining your own infix operator
+
+```r
+`%horseplus%` <- function(x, y) {
+  z <- x + y
+  message("This horse likes bread.")
+  return(z)
+}
+```
+
+```r
+3 %horseplus% 5
+# This horse likes bread.
+# 8
+```
+
+All self-defined infix operators have to be fenced with `%`
+
+https://stackoverflow.com/questions/24697248/is-it-possible-to-define-operator-without
+
+## Exercise
+
+Define an infix operator `%na0plus%` that
+
+- takes two numeric scalars (so individual numbers, not vectors) 
+- returns the sum of the input values, but replaces NA with 0
+
+```r
+NA + 5 # NA
+```
+
+```r
+NA %na0plus% 5 # 5
+```
+
+## Exercise
+
+Define an infix operator `%na0plus%` that
+
+- takes two numeric scalars (so individual numbers, not vectors) 
+- returns the sum of the input values, but replaces NA with 0
+
+Possible solution:
+
+```r
+`%na0plus%` <- function(x, y) {
+  x <- `if`(is.na(x), 0, x)
+  y <- `if`(is.na(y), 0, y)
+  x + y
+}
+```
+
+```r
+NA %na0plus% 5 # 5
+```
+
+https://codegolf.stackexchange.com/questions/4024/tips-for-golfing-in-r
+
+## Chaining functions together
+
+The pipe `%>%` in the magrittr package is nothing but a clever infix operator
+
+```r
+c(1,2,3) %>% mean()
+```
+
+It *pipes* the LHS *in* as the first argument of the function appearing on the RHS
+
+That allows for sequences of functions ("tidyverse style")
+
+```r
+mtcars %>%
+  dplyr::group_by(cyl) %>%
+  dplyr::summarise(mean_mpg = mean(mpg))
+```
+
 ## Default input values
 
 R functions can have default values for all of their arguments. That is a great way to simplify complicated interfaces for normal usecases
@@ -360,75 +497,6 @@ do_it_twice(times_two)(5) # 20
 do_it_twice(do_it_twice(times_two))(5) # 80
 ```
 
-## Infix operators
-
-R comes with a set of operators, some prefix, some infix, some postfix
-
-```
-+, -, *, /, ^, &, |, :, ::, :::, $, =, <-, <<-, ==, 
-<, <=, >, >=, !=, ~, &&, ||, !, ?, @, :=, (, {, [, [[
-```
-
-Infix operators are special binary functions, so functions with two arguments, that can be written in between the function arguments
-
-```r
-3 + 5
-```
-
-R allows you to write infix operators as normal functions and to define own infix operators
-
-## Infix operators
-
-Using an infix operator as a normal function
-
-```r
-3 + 5 # 8
-```
-
-```r
-`+`(3, 5) # 8
-```
-
-3 is the LHS (Left-hand side) and 5 the RHS (Right-hand side) input of the `+` operator
-
-## Infix operators
-
-Defining your own infix operator
-
-```r
-`%horseplus%` <- function(x, y) {
-  z <- x + y
-  message("This horse likes bread.")
-  return(z)
-}
-```
-
-```r
-3 %horseplus% 5
-# This horse likes bread.
-# 10
-```
-
-All self-defined infix operators have to be fenced with `%`
-
-## Chaining functions together
-
-The pipe `%>%` in the magrittr package is nothing but a clever infix operator
-
-```r
-c(1,2,3) %>% mean()
-```
-
-It *pipes* the LHS *in* as the first argument of the function appearing on the RHS
-
-That allows for sequences of functions ("tidyverse style")
-
-```r
-mtcars %>%
-  dplyr::group_by(cyl) %>%
-  dplyr::summarise(mean_mpg = mean(mpg))
-```
-
 # Practical concerns
 
 ## How to write functions
@@ -499,4 +567,8 @@ myfunc(x = 5, y = "cookies")
 # not 'character'.
 ```
 
-# Exercise
+# Final exercise
+
+## Final exercise
+
+https://github.com/sslarch/caa2021_Rpackage_workshop/blob/main/exercises/exercise_functions.R

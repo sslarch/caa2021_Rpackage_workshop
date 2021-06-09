@@ -1,0 +1,109 @@
+---
+title: "Wrap up and final discussion"
+author: "Sophie Schmidt, Clemens Schmid and Petr Pajdla"
+output: 
+  beamer_presentation:
+    slide_level: 2
+    theme: "Singapore"
+    includes:
+      in_header: preamble.tex
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+# Recap
+
+## Recap
+
+- Adopting package development techniques is good for:
+
+    - future-self
+    - the community (reproducibility etc.)
+
+- Don't be afraid to use the *wizards*, they are here to help!
+
+    - `devtools`
+    - `usethis`
+    - `roxygen`
+
+## The basic `R` package directory tree
+
+```
+.
+|--- DESCRIPTION
+|--- mypackage.Rproj
+|--- LICENSE
+|--- LICENSE.md
+|--- man
+|    |--- myfunction.Rd
+|    |--- myotherfunction.Rd
+|--- NAMESPACE
+|--- R
+|    |--- myfunction.R
+|    |--- myotherfunction.R
+```
+
+# Going further
+
+## Where to learn more I
+
+- Official `CRAN` **Writing R Extensions** manual
+
+  - [https://cran.r-project.org/doc/manuals/R-exts.html](https://cran.r-project.org/doc/manuals/R-exts.html)
+  - very long and throughout
+  
+\begin{center}
+\includegraphics[width=300px]{"../figures/Screenshot_rextensions.png"}
+\end{center}
+
+## Where to learn more II
+
+- **R Packages** book by Hadley Wickham and Jenny Bryan
+
+    - online version at **[https://r-pkgs.org/](https://r-pkgs.org/)**
+
+\begin{center}
+\includegraphics[width=120px]{"../figures/Screenshot_rpackages.png"}
+\end{center}
+
+## Where to get help?
+
+- Package development **cheat sheet**
+
+  - [https://www.rstudio.com/resources/cheatsheets/](https://www.rstudio.com/resources/cheatsheets/)
+
+\begin{center}
+\includegraphics[width=300px]{"../figures/Screenshot_pckgdevcheatsheet.png"}
+\end{center}
+
+- and of course **help files** and package **vignettes**...
+
+## Questions and general discussion
+
+Don't forget to check out session
+
+- **S17 Tools for the Revolution:**
+
+    Developing packages for scientific programming in archaeology
+
+    - organized by Joe Roe, Martin Hinz and Clemens Schmid
+    - Wednesday, **June 16th 10:50 - 14:20** EET
+
+For materials from the workshop, see
+
+[https://github.com/sslarch/caa2021_Rpackage_workshop](https://github.com/sslarch/caa2021_Rpackage_workshop)
+
+## 
+
+\centering
+\Large
+**Thank you for attending the workshop!**
+
+
+\flushright
+\normalsize
+*Sophie, Clemens and Petr*

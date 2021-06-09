@@ -21,15 +21,32 @@ knitr::opts_chunk$set(eval = FALSE)
 
 > Crucial both for other people and for future-you!
 
+- `README` File
+
 - *Object* documentation
 
-    - documentation of individual functions
+    - documentation of individual objects (functions)
     - accesed by `help(myfun)` or `?myfun`
     
 - Vignettes
 
     - long-form documentation
     - whole *workflows* of functions implemented in the package
+
+## `README` file
+
+- Simple `Markdown` file in the root directory (`./README.md`)
+- Sometimes all you have to read:
+
+    - purpose of the package
+    - basic usage of the package
+    - how to install the package
+    - stage of the development
+    - citation, license information and much more
+    
+- use `usethis::use_readme_md()` or `usethis::use_readme_rmd()` if yu want to include examples of code
+
+See examples of `README` files on GitHub, e.g. [c14bazAAR](https://github.com/ropensci/c14bazAAR)
 
 ## Documenting functions
 
@@ -89,11 +106,14 @@ The myfun function calculates (...)
 - Always start with **`#'`**
 - Tags for various *sections* `#' @tag`
 
-```r
-#' @title My Function
+```
+#' My Function.
+#' 
+#' My function does this and that.
+#'
 #' @param x (...)
 #' @return A number (...)
-
+#'
 myfun <- function(x) {
   ...
 }
@@ -113,22 +133,22 @@ myfun <- function(x) {
 
 ![part of documentation of sum function](../figures/Screenshot_documentation.png)
 
-# Common tags
+# Tags
 
-## `@param`
+## Parameters (function arguments)
 
 `@param name description` 
 
 - function parameters - document all inputs!
 - A sentence, paragraph or even longer text if necessary.
 
-```r
+```
 #' @param x A numeric vector.
 #' @param data A data frame. See below for details.
 #' @param x,y Numeric vectors.
 ```
 
-## `@examples`
+## Examples of code
 
 `@examples`
 
@@ -140,22 +160,22 @@ myfun <- function(x) {
 
 - contains relative path to `.R` file with examples
 
-```r
+```
 #' @examples 
 #' mean(c(1, 2, 3))
 #'
-#' \dontrun{mean(c("a", "b", "c"))}
-#'
-#' @example relative/path/
+#' \dontrun{
+#'   mean(c("a", "b", "c"))
+#' }
 ```
 
-## `@return`
+## Function output
 
 `@return description`
 
 - describes the output of the function
 
-```r
+```
 #' @return The default method returns a length-one 
 #'    object of the same type as \code{x}. If (...)
 
@@ -163,7 +183,17 @@ myfun <- function(x) {
 #'    is returned. 
 ```
 
-# Useful tags 
+## Export the function
+
+`@export`
+
+- exports the function for the *end* user
+- adds a proper line to **`NAMESPACE`** file
+- functions that are not exported remain *internal*
+
+- to access internal function, use `pckgname:::funname`
+
+
 
 ## Linking
 
@@ -171,7 +201,7 @@ myfun <- function(x) {
 
 - points to other resources inside the package or elsewhere
 
-```r
+```
 #' @seealso For details, see similar
 #'    function \code{\link{funname}}.
 
@@ -180,9 +210,10 @@ myfun <- function(x) {
 #' @seealso See \code{\link[pckgname]{funname}}
 #'    function from package (...)
 ```
-`@family name`
 
-- allows to create *families* of functions 
+<!-- `@family name`
+
+- allows to create *families* of functions -->
 
 ## Other tags
 
@@ -195,37 +226,73 @@ myfun <- function(x) {
 - adds additional aliases to the function
 - the topic is found by `?alias1` or `?alias2` etc.
 
-`@keywords keyword1 ...`
+<!-- `@keywords keyword1 ...`
 
 - keywords are standardized
 
-    see `file.path(R.home("doc"), "KEYWORDS")`
+    see `file.path(R.home("doc"), "KEYWORDS")`-->
 
+<!--
 ```r
 #' @keywords internal
 ```
+-->
+
+# `Rd` Markup
 
 ## Formatting
 
+- `@` = start of roxygen tag, to write at sign (@), use `@@`
+- `%` = LaTeX comment sign, escape it by backwards slash `\%` 
+- `\` = LaTeX escape sign, escape it to get a single bw. slash `\\`
+
 ```
-\code{}
-\link{}
+#' @author My Name <my.email@@fuu.bar>
 ```
 
-## Linking
+- `\code{}` - code snippets
+- `\link{funname}` - link to function in this package
+- `\link[pckgname]{funname}` - link to function in another package
+
+```
+#' @return Object of class \code{data.frame}.
+#' @seealso See \code{\link[base]{data.frame}} for details.
+```
 
 ## Equations
 
+- standard LaTeX math (without AMS or other extensions)
+- `\eqn{}` - inline equation
+- `\deqn{}` - block (*display*) equation
 
-<!--
-Documentation with roxygen2 (man/)
-30mins
-General workflow/setup
-Where to write Documentation
-How to render it
-How to explore it
-How to fill the most typical tags
-More obscure tags
-Formulas (mathematical function definition), citations and specific applications
-Task: Add some documentation to your functions and render it
--->
+```
+#' @section Details on maths
+#' Sample mean is calculated as
+#' \deqn{\overline{x} = \frac{1}{n}\sum_{i=1}^n x_i}
+```
+
+should result in something like this:
+
+$$
+\overline{x} = \frac{1}{n}\sum_{i=1}^n x_i
+$$
+*(but in the html help files, equations are simplified...)*
+
+# Wrap up & exercise
+
+## Where to get help?
+
+- Do I have to know all of this by hearth?!
+
+  - Luckily, nope!
+  
+- package development [cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/master/package-development.pdf) (https://www.rstudio.com/resources/cheatsheets/)
+- See the introduction and other vignettes for `roxygen2` package
+
+    - `vignette("roxygen2")`
+    - `vignette(package = "roxygen2")`
+
+
+If you are using `RStudio`:
+
+- go to `Help/Roxygen Quick Reference`
