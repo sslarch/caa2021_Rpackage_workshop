@@ -56,6 +56,7 @@ Developers and user can easily define own functions
 # function definition
 myfunc <- function(x, y) {
   x + y
+  return(z)
 }
 # function application
 myfunc(1,2)
@@ -82,9 +83,36 @@ return(z)
 
 - Return value: `return(z)`
 
+## Exercise
+
+Write a function that
+
+- takes a numeric vector without NA and 
+- returns the arithmetic mean of this input vector
+
+## Exercise
+
+Write a function that
+
+- takes a numeric vector without NA and 
+- returns the arithmetic mean of this input vector
+
+Possible solution:
+
+```r
+mymean <- function(x) {
+  z <- sum(x) / length(x)
+  return(z)
+}
+```
+
+```r
+mymean(c(1,2,3,4))
+```
+
 ## Syntax
 
-We can reduce this: 
+We can reduce the function definition: 
 
 Functions don't need an explicit return statement. The value of the last statement is returned
 
@@ -406,7 +434,7 @@ Defining your own infix operator
 ```r
 3 %horseplus% 5
 # This horse likes bread.
-# 10
+# 8
 ```
 
 All self-defined infix operators have to be fenced with `%`
