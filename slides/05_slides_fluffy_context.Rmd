@@ -1,5 +1,5 @@
 ---
-title: "Fluffy context"
+title: "Fluff it up!"
 author: "Petr Pajdla"
 output: 
   beamer_presentation:
@@ -15,5 +15,158 @@ editor_options:
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-# Fluffy...
+# Readme
 
+# Licenses
+
+## Licenses
+
+- There are many options and differences under various legal systems, in general, you want your code to be accessible...
+- What if I do not specify an **open source** license?
+
+[https://choosealicense.com/](https://choosealicense.com/) helps you with choosing a license...
+
+- Most common options for software:
+
+    - **MIT License**: simple & permissive
+        
+        *"Do whatever you want with my stuff."*
+        
+    - **GNU GPLv3**: *copyleft* license
+    
+        *"Do whatever you want, but always show the source code."*
+
+\scriptsize        
+- What about the `CC-BY-Licenses`?
+
+    - \scriptsize These are licenses for the data (etc.), `CC-BY-4.0` and `CC-BY-SA-4.0` should not be used for software.
+    
+        [https://creativecommons.org/choose/](https://creativecommons.org/choose/)
+
+## Creating a license
+
+- License lives in the `LICENSE` file
+- It is specified in a proper field in the `DESCRIPTION`
+
+`usethis::use_*_license()` helper function:
+
+- `usethis::use_mit_license("First Last")`
+
+    to use MIT License
+    
+- `usethis::use_gpl3_license()`
+
+    to use GNU GPL v3
+
+# Citations
+
+## Citations
+
+> `We have invested a lot of time and effort in creating R, please cite it when using it for data analysis.`
+
+- Citing packages employed in your analysis is a good practice 
+(as well as citing books, articles and other sources you use...)
+
+- `R` makes this super easy!
+
+`citation()` returns citation for `R`
+
+`citation(package = "pckgname")` returns citation for a package
+
+\footnotesize
+sometimes, there are several items you can cite and no BiBTeX, wrap the `citation()` call into `toBibtex()` function: `toBibtex(citation(package = "spatstat"))`
+
+## Citing `R`
+
+\footnotesize
+
+```
+> citation()
+
+To cite R in publications use:
+
+  R Core Team (2021). R: A language and environment (...) 
+  R Foundation for  Statistical Computing, Vienna, (...)
+  URL https://www.R-project.org/.
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {R: A Language and Environment (...)},
+    author = {{R Core Team}},
+    organization = {R Foundation for Statistical (...)},
+    (...)
+  }
+```
+
+## Adding a citation to your package
+
+- if you do not add it yourself, it is generated from `DESCRIPTION`
+- lives in a file `inst/CITATION`
+
+**`usethis::use_citation()`** creates the file for you:
+
+\scriptsize
+```
+citHeader("To cite myAMAZINGpackage in publications use:")
+citEntry(
+  entry    = "Article",
+  title    = "myAMAZINGpacakge",
+  author   = as.person("first last"),
+  journal  = "Amazing packages journal",
+  year     = "2021",
+  volume   = "4",
+  number   = "2",
+  pages    = "42-69",
+  url      = "www.myAMAZINGwebsite.org",
+  textVersion = paste(
+    "First, Last 2021: myAMAZINGpackage. Amazing packages journal
+    4(2), 42-69. www.myAMAZINGwebsite.org"))
+```
+
+# Wrap up and exercise
+
+## Exercise I
+
+### License
+
+1. Explore the `DESCRIPTION` file, what does it say about the license?
+2. Add MIT License with your name to your package.
+3. Explore the `DESCRIPTION`, `LICENSE` and `LICENSE.md` files
+
+## Exercise II
+
+### Citations
+
+1. Load your package
+
+    (`devtools::load_all()` or `Ctrl+Shift+L` in `Rstudio`)
+    
+2. See the default citation `citation("pckgname")`
+
+3. Let's edit the citation!
+
+4. Use `usethis::use_citation()` to generate a `CITATION` file
+
+5. Fill in the gaps!
+
+6. Load the package.
+
+7. Inspect the citation.
+
+8. Repeat until:
+    
+    1. You get no error messages and/or
+    2. It is perfect...
+
+
+<!-- 
+Petr: Fluffy context (README, LICENSE, inst/CITATION, Contribution guidelines, Code of conduct, ...)
+30mins
+Fluff your package up!
+More mighty wizards: The usethis package
+What a good README contains
+How to find the right license
+How to make your package citable and how to cite other packages (and why!)
+Fostering a community around your package
+-->
