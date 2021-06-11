@@ -17,6 +17,45 @@ knitr::opts_chunk$set(eval = FALSE)
 
 # Readme
 
+## `README` file
+
+- Simple `Markdown` file in the root directory (`./README.md`)
+- Sometimes all you have to read:
+
+    - purpose of the package
+    - basic usage of the package
+    - how to install the package
+    - stage of the development
+    - citation, license information and much more
+    
+- use `usethis::use_readme_md()` or `usethis::use_readme_rmd()` if you want to include examples of code
+
+See examples of `README` files on GitHub, e.g. [c14bazAAR](https://github.com/ropensci/c14bazAAR)
+
+# Versioning
+
+## Semantic versioning
+
+**`<major>.<minor>.<patch>`**, e.g. 4.2.0
+
+- **major version** `usethis::use_version("major")`
+    
+    incremented when an existing function is changed or removed, i.e. the change might (oh it will!) break existing code
+    
+- **minor version** `usethis::use_version("minor")`
+
+    new functionality is added but the code is backward compatible, i.e. old code works but there are some new functions
+    
+- **patch** `usethis::use_version("patch")`
+
+    updates to existing functions, bugs are fixed etc.
+
+### Versioning pacakges in development
+
+- Start at **0.0.0.9000** and increment when adding features
+
+    `usethis::use_version("dev")`
+
 # Licenses
 
 ## Licenses
@@ -43,7 +82,10 @@ knitr::opts_chunk$set(eval = FALSE)
     
         [https://creativecommons.org/choose/](https://creativecommons.org/choose/)
 
-## Creating a license
+\tiny
+For details, see chapter **[Licenses](https://r-pkgs.org/license.html?q=license#license-compatibility)** in R Packages book by Hadley Wickham and **[Licensing R book](https://thinkr-open.github.io/licensing-r/)** by Colin Fay.
+
+## Adding a license
 
 - License lives in the `LICENSE` file
 - It is specified in a proper field in the `DESCRIPTION`
@@ -57,6 +99,10 @@ knitr::opts_chunk$set(eval = FALSE)
 - `usethis::use_gpl3_license()`
 
     to use GNU GPL v3
+
+- `usethis::use_cc0_license()` or `usethis::use_ccby_license()`
+
+    to use CC License, with a *data* package only!
 
 # Citations
 
@@ -124,11 +170,31 @@ citEntry(
     4(2), 42-69. www.myAMAZINGwebsite.org"))
 ```
 
-# Wrap up and exercise
+# Communities
+
+## Fostering community development
+
+- Use git with [GitHub](https://github.com/) or [GitLab](https://gitlab.com/) so people can cooperate
+
+    (slightly more on this in the *Advanced topics*)
+
+- Be clear on **how** to contribute by including
+
+    - Contributing guidelines
+    - Code of conduct (`usethis::use_code_of_conduct()`)
+    - How to troubleshoot issues etc.
+
+# Exercise
 
 ## Exercise I
 
-### License
+### Add and explore basic `README` file, fill it in
+
+<!-- 1. Add it using `usethis::use_readme.md()`-->
+
+### Add a development version (0.0.0.9000)
+
+### Add license
 
 1. Explore the `DESCRIPTION` file, what does it say about the license?
 2. Add MIT License with your name to your package.
@@ -161,12 +227,7 @@ citEntry(
 
 
 <!-- 
-Petr: Fluffy context (README, LICENSE, inst/CITATION, Contribution guidelines, Code of conduct, ...)
+Petr: Fluffy context (README, Contribution guidelines, Code of conduct, ...)
 30mins
-Fluff your package up!
-More mighty wizards: The usethis package
-What a good README contains
-How to find the right license
-How to make your package citable and how to cite other packages (and why!)
 Fostering a community around your package
 -->
