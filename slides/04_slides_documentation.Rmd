@@ -296,3 +296,23 @@ $$
 If you are using `RStudio`:
 
 - go to `Help/Roxygen Quick Reference`
+
+## Exercise
+
+- Do you have a package with two functions defined?
+
+    - `doubleamean()`
+    - `normalmean()` (?)
+
+- Let's document the functions!
+
+    1. Add meaningful title
+    2. Add basic description
+    3. Document the parameters
+    4. What does the function return?
+    5. Any examples?
+    6. Export the function to the `NAMESPACE`
+    7. Add a link to function `mean` from `base R`
+    8. Run `devtools::document()`
+    9. Explore the help files with `?doubleamean`
+
