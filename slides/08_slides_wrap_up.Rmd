@@ -32,19 +32,39 @@ knitr::opts_chunk$set(eval = FALSE)
 
 ## The basic `R` package directory tree
 
+\scriptsize
 ```
 .
 |--- DESCRIPTION
-|--- mypackage.Rproj
-|--- LICENSE
-|--- LICENSE.md
-|--- man
-|    |--- myfunction.Rd
-|    |--- myotherfunction.Rd
 |--- NAMESPACE
+|--- mypackage.Rproj
 |--- R
 |    |--- myfunction.R
 |    |--- myotherfunction.R
+|--- man
+|    |--- myfunction.Rd
+|    |--- myotherfunction.Rd
+```
+
+## Package structure after fluffing it up
+
+\scriptsize
+```
+.
+|--- DESCRIPTION
+|--- NAMESPACE
+|--- mypackage.Rproj
+|--- R
+|    |--- myfunction.R
+|    |--- myotherfunction.R
+|--- man
+|    |--- myfunction.Rd
+|    |--- myotherfunction.Rd
+|--- README.md
+|--- LICENSE
+|--- LICENSE.md
+|--- INST
+|    |--- CITATION
 ```
 
 # Going further
