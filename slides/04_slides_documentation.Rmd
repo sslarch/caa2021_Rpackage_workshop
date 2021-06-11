@@ -33,21 +33,6 @@ knitr::opts_chunk$set(eval = FALSE)
     - long-form documentation
     - whole *workflows* of functions implemented in the package
 
-## `README` file
-
-- Simple `Markdown` file in the root directory (`./README.md`)
-- Sometimes all you have to read:
-
-    - purpose of the package
-    - basic usage of the package
-    - how to install the package
-    - stage of the development
-    - citation, license information and much more
-    
-- use `usethis::use_readme_md()` or `usethis::use_readme_rmd()` if yu want to include examples of code
-
-See examples of `README` files on GitHub, e.g. [c14bazAAR](https://github.com/ropensci/c14bazAAR)
-
 ## Documenting functions
 
 - Documentation goes into the `man/` directory
