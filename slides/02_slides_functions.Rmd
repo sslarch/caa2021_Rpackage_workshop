@@ -55,7 +55,7 @@ Developers and user can easily define own functions
 ```r
 # function definition
 myfunc <- function(x, y) {
-  x + y
+  z <- x + y
   return(z)
 }
 # function application
@@ -181,7 +181,7 @@ myfunc <- function(x, y) {
 
 ## Types
 
-Every object in a programming environment has some type. R function have no way to being explicit about this: Dynamic type system
+Every object in a programming environment has some type. R functions have no way to being explicit about this: Dynamic type system
 
 ```r
 myfunc <- function(x, y) { x + y }
