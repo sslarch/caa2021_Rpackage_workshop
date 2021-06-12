@@ -69,7 +69,7 @@ usethis::use_data_raw()
 - like function documentation: #', first paragraph = title, second paragraph = description
 
 ## example documentation (from `ggplot2`):
-
+\scriptsize
 ```{r}
 #' Prices of 50,000 round cut diamonds.
 #'
@@ -111,6 +111,7 @@ usethis::use_data(x, mtcars, internal = TRUE)
 - to refer to files in inst/extdata (whether installed or not), use system.file()
 - readr package uses inst/extdata to store delimited files for use in examples:
 
+\scriptsize
 ```{r}
 system.file("extdata", "mtcars.csv", package = "readr")
 #> [1] "/Users/runner/work/_temp/Library/readr/extdata/mtcars.csv"
@@ -124,6 +125,7 @@ system.file("extdata", "mtcars.csv", package = "readr")
 - create a small dataset, save it with `usethis::use_data()` and try `usethis::use_data_raw()`
 - document the data in an R-file within the R-folder (same name as dataset!)
 - remember to use `@format` with
+\scriptsize
 ```r
 \describe{
  \item {variable}{unit}
