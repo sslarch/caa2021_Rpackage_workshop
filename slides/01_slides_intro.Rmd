@@ -30,16 +30,14 @@ Please tell us in one sentence:
 
 1. function writing
 
-(5min break)
-
 2. package structure
 
 3. documentation!
 
 4. fluffy context
 
-(15min break)
-
 5. data
 
 6. advanced topics
+
+**breaks will be decided by the system**
