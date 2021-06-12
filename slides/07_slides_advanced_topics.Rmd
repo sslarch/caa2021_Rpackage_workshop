@@ -80,7 +80,7 @@ A unit test is test code to check if a function returns what you expect given a 
 
 **https://github.com/r-lib/actions**
 
-Continous integration means automatic testing and checking of code changes. Multiple companies offer free web services for open source projects (Travis-CI, Gitlab, Github)
+Continuous integration means automatic testing and checking of code changes. Multiple companies offer free web services for open source projects (Travis-CI, Gitlab, Github)
 
 - Each change to your project triggers a full test
 - Clean, virtual environments and multiple OS
