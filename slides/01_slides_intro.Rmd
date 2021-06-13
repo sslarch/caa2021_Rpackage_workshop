@@ -16,6 +16,7 @@ editor_options:
 ## short introduction
 
 Please tell us in one sentence:
+
 - Who you are and what you hope to gain from this workshop
 
 ## Reasons to create R packages

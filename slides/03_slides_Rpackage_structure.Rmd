@@ -53,7 +53,7 @@ use:
 - NAMESPACE file
 
 ## R/
-- the "heart" of the package: all you beautiful functions live here
+- the "heart" of the package: all your beautiful functions live here
 - each script ends on .R
 - what goes in one file?
   - if a function is very large, it may live alone
@@ -251,7 +251,6 @@ load_all()
 ```{r}
 # option 1 (then you should also put utils in Imports)
 utils::globalVariables(c("a"))
-
 # option 2
 a <- NULL
 ```

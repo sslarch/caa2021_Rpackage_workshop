@@ -28,7 +28,7 @@ knitr::opts_chunk$set(eval = FALSE)
 
     - `devtools`
     - `usethis`
-    - `roxygen`
+    - `roxygen2`
 
 ## The basic `R` package directory tree
 
