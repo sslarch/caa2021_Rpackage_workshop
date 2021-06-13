@@ -99,7 +99,7 @@ R supports multiple different Object-oriented programming systems to implement p
 
 - Competing systems: S3, S4, RC, R6, R.oo, proto, ?
 - Many packages rely on custom S3, S4 or R6 classes
-- Many functions are in these packages are class methods, so they only work with specific input data types or work explicitly different for different input types
+- Many functions in these packages are class methods, so they only work with specific input data types or work explicitly different for different input types
 - base R relies extensively on S3 classes
 
 ## OOP and custom types
@@ -144,7 +144,7 @@ R packages can incorporate code from compiled languages to speed up processes
 
 **https://r-pkgs.org/release.html**
 
-At the very end of the initial package development process can be the submission to CRAN
+At the very end of the initial package development process you can consider a submission to CRAN
 
 - Intensive checks on different test systems
 - The CRAN submission process

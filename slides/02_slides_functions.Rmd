@@ -305,7 +305,9 @@ myfunc <- function() {
 }
 ```
 
-Package code is often more verbose than script code (lazy evaluation)
+Package code is often more verbose than script code
+
+Tidy evaluation: https://dplyr.tidyverse.org/articles/programming.html
 
 # Advanced topics
 
