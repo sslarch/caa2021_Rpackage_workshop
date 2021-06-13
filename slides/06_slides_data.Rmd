@@ -28,7 +28,7 @@ knitr::opts_chunk$set(eval = FALSE,
 - parsed data, that's not available to the user: store it as R/sysdata.rda
 - raw data, availabe for the user: inst/extdata
 
---> in package development, working with the source package, /data is the usual choice
+--> in package development, working with the source package, data/ is the usual choice
 
 ## Exported data using /data
 
@@ -65,7 +65,7 @@ usethis::use_data_raw()
 - objects in data/ always have to be documented!
 - similar to documenting functions 
 - can't write Roxygen documentation "into" the dataset
-- write it an R-file in R/ with the same name as the data instead
+- instead: write it in an R-file in R/ with the same name as the data 
 - like function documentation: #', first paragraph = title, second paragraph = description
 
 ## example documentation (from `ggplot2`):
@@ -107,7 +107,7 @@ usethis::use_data(x, mtcars, internal = TRUE)
 ## Raw data for the bundled package
 
 - if you want to show e.g. how to load raw data --> inst/extdata
-- all files in inst/ move up one level to the top-level directory 
+- all files in inst/ move up one level to the top-level directory when built
 - to refer to files in inst/extdata (whether installed or not), use system.file()
 - readr package uses inst/extdata to store delimited files for use in examples:
 
@@ -117,7 +117,7 @@ system.file("extdata", "mtcars.csv", package = "readr")
 #> [1] "/Users/runner/work/_temp/Library/readr/extdata/mtcars.csv"
 
 ```
-- by default, if the file does not exist, system.file() does not return an error - it just returns the empty string:
+- by default, if the file does not exnist, system.file() does not return a error - it just returns the empty string:
 - argument mustWork = TRUE --> error message if file doesn't exist
 
 # Exercise!
@@ -125,6 +125,7 @@ system.file("extdata", "mtcars.csv", package = "readr")
 - create a small dataset, save it with `usethis::use_data()` and try `usethis::use_data_raw()`
 - document the data in an R-file within the R-folder (same name as dataset!)
 - remember to use `@format` with
+
 \scriptsize
 ```r
 \describe{
