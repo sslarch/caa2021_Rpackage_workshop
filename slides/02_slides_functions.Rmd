@@ -23,23 +23,23 @@ Functions are code modules that perform a specific operation
 
 - Self-contained
     - Take in specific input and return output
-    - Runs in an own scope
-    - Black box: We don't have to understand them to use them
+    - Code in the function body runs in an own scope
+    - Black box: We don't have to understand a function to use it
 - Reusable
     - Can be called over and over again in different contexts
-    - Can be made more or less generic
-    - Can be made available to other developers
+    - Can be made more or less generic for more or less specific usecases
+    - Can be made available to other developers (via R Packages)
 
-Functions are a major building block of software (R Packages)
+Writing packages is mostly writing functions
 
 # Functions in R
 
 ## Functions in R
 
-R provides a several thousand functions in the core packages (base, graphics, stats, methods, ...)
+R provides several thousand functions in the core packages (base, graphics, stats, methods, ...)
 
 ```r
-base::mean(c(1,2,3))
+mean(c(1,2,3))
 ```
 
 More functions are distributed through packages in a large ecosystem (CRAN, Github, ...)
@@ -73,7 +73,7 @@ myfunc <- function(x, y) {
 }
 ```
 - Function name: `myfunc`
-- Arguments: `x` and `x`
+- Input arguments: `x` and `y`
 - Function body:
 
 ```r
@@ -81,7 +81,7 @@ z <- x + y
 return(z)
 ```
 
-- Return value: `return(z)`
+- Return value: `z`
 
 ## Exercise
 
@@ -107,25 +107,31 @@ mymean <- function(x) {
 ```
 
 ```r
-mymean(c(1,2,3,4))
+mymean(c(1,2,3,4)) # 2.5
 ```
 
 ## Syntax
 
 We can reduce the function definition: 
 
-Functions don't need an explicit return statement. The value of the last statement is returned
+Functions don't need an explicit `return` statement. The value of the last statement is automatically returned
 
 ```r
 myfunc <- function(x, y) { x + y }
 ```
 
-## Syntax
-
-Functions also do not need a name: Lambda functions
+For one-line function bodies we also don't need curly brackets
 
 ```r
-function(x, y) { x + y }
+myfunc <- function(x, y) x + y
+```
+
+## Syntax
+
+Functions do not even need a name: Lambda functions
+
+```r
+function(x, y) x + y
 ```
 
 This is useful when we want to use a function only once for a very specific purpose (later: Higher Order functions)
@@ -134,8 +140,8 @@ This is useful when we want to use a function only once for a very specific purp
 myvec1 <- c(1,2,3)
 myvec2 <- c(5,6,7)
 Map(
-  f = function(x, y) { x + y },
-  myvec, myvec2
+  f = function(x, y) x + y,
+  myvec1, myvec2
 )
 ```
 
@@ -167,10 +173,11 @@ Each function has zero, one or multiple input arguments, but only exactly one ou
 Even a function without output returns `NULL`
 
 ```r
-myfunc <- function(x, y) { cat(x) }
+myfunc <- function(x, y) { message(x) }
+myfunc(1) # NULL
 ```
 
-Usually the output of functions is immediatelly printed on the console. This can be prevented with `invisible` instead of `return`
+Usually the output of functions is immediately printed on the console. This can be prevented with `invisible` instead of `return`
 
 ```r
 myfunc <- function(x, y) {
@@ -181,13 +188,13 @@ myfunc <- function(x, y) {
 
 ## Types
 
-Every object in a programming environment has some type. R functions have no way to being explicit about this: Dynamic type system
+Every object in a programming environment has some type. But R functions have no way of being explicit about this: Dynamic type system
 
 ```r
 myfunc <- function(x, y) { x + y }
 ```
 
-We can use myfunc with every input the `+` operator is defined, so all kinds of numeric data types
+We can use `myfunc` with every input for which the `+` operator is defined, so all kinds of numeric data types
 
 ```r
 class(1.1) # "numeric"
@@ -219,19 +226,22 @@ myfunc("A", "B")
 
 Advantages of dynamic typing
 
-- less verbose function definition
-- very flexible functions (functions often automatically work for multiple input types)
+- less verbose function definition, because the types don't have to be named
+- potentially very flexible functions (functions often automatically work for multiple input types)
+- rapid prototyping
 
 Disadvantages
 
-- Nasty error messages: No explicit input validation
-- No type validation at "compile"-time
+- Nasty error messages for wrong input: No explicit input validation
+- No type validation at "compile"-time: significant loss of robustness 
+
+That's just the way R is designed
 
 ## Namespaces
 
-Functions we did not define ourself always exist in some package
+Functions we did not define ourself always come from some package
 
-- For core R functions we can just access them
+- Core R functions can just be accessed directly
 
 ```r
 mean()
@@ -244,7 +254,7 @@ library(ggplot2)
 require(magrittr) # rarely used
 ```
 
-- Or we contextualize the function explictly
+- Or we contextualize the function explicitly with the `::` operator
 
 ```r
 dplyr::mutate()
@@ -255,7 +265,7 @@ c14bazAAR:::check_connection_to_url() # internal
 
 When developing a package, this becomes less convenient:
 
-All functions need to be explicitly called, except they come from base R
+All functions need to be explicitly called, except they come from the base package
 
 ```r
 stats::anova()
@@ -263,21 +273,55 @@ stats::anova()
 
 Alternatively we could use the `importFrom` statement in the `NAMESPACE` file
 
+## Exercise
+
+Convert this function to a function that could exist in a package
+
+```r
+library(palmerpenguins)
+
+myfunc <- function() {
+  bm <- penguins$body_mass_g
+  bl <- penguins$bill_length_mm
+  plot(bm, bl)
+  pearson <- cor(bm, bl, use = "complete.obs")
+  text(x = 5500, y = 35, labels = pearson)
+}
+```
+
+## Exercise
+
+Convert this function to a function that could exist in a package
+
+Possible solution:
+
+```r
+myfunc <- function() {
+  bm <- palmerpenguins::penguins$body_mass_g
+  bl <- palmerpenguins::penguins$bill_length_mm
+  graphics::plot(bm, bl)
+  pearson <- stats::cor(bm, bl, use = "complete.obs")
+  graphics::text(x = 5500, y = 35, labels = pearson)
+}
+```
+
+Package code is often more verbose than script code (lazy evaluation)
+
 # Advanced topics
 
 ## Infix operators
+
+Infix operators are special binary functions, so functions with two arguments, that can be written in between the function arguments
+
+```r
+3 + 5
+```
 
 R comes with a set of operators, some prefix, some infix, some postfix
 
 ```
 +, -, *, /, ^, &, |, :, ::, :::, $, =, <-, <<-, ==, 
 <, <=, >, >=, !=, ~, &&, ||, !, ?, @, :=, (, {, [, [[
-```
-
-Infix operators are special binary functions, so functions with two arguments, that can be written in between the function arguments
-
-```r
-3 + 5
 ```
 
 R allows you to write infix operators as normal functions and to define own infix operators
@@ -434,8 +478,7 @@ myfunc <- function(..., na.rm = T) {
   if (!na.rm) {
     z <- Reduce(`+`, ell_args, init = 0)
   } else {
-    ell_args_without_na <- ell_args[!is.na(ell_args)]
-    z <- Reduce(`+`, ell_args_without_na, init = 0)
+    z <- Reduce(`%na0plus%`, ell_args, init = 0)
   }
   z <- return(z)
 }
@@ -454,7 +497,7 @@ A higher-order function is a function that does one of the following:
 - takes one or more functions as arguments
 - returns a function as its result
 
-R supports this, so functions are "first class citizens" in R.
+R supports this, so functions are "first class citizens" in R
 
 Why would one want to do this?
 
@@ -479,10 +522,10 @@ myfunc(c(1, 2, 3), sum) # 6
 
 ## Higher-order functions
 
-Functions as a function's input and output
+A function as a function's input and output
 
 ```r
-times_two <- function(x) { x*2 }
+times_two <- function(x) { x * 2 }
 ```
 
 ```r
@@ -516,18 +559,18 @@ General advice for using functions in scripts
 - Identify repeating code patterns in your script
 - If you do something **three or more** times, then it is worth putting it into a function
 - Cover small differences between patterns with function arguments
-- One function should only do one thing, but complete atomization decreases readability
+- Function length: One function should only do one thing, but complete atomization decreases readability
 
 ## Scripts and Packages
 
-In a package all code lives in functions, so workflows live in sequences of functions
+A script usually covers one workflow, but in a package all code lives in functions, so workflows live in sequences of functions
 
 ```r
 read_data("path/to/file") %>%
   mypackage::manipulate_data_A() %>%
   another_package::manipulate_data_B() %>%
   mypackage::manipulate_data_C() %>%
-  mypackage::plot_data_B()
+  mypackage::plot_data_D()
 ```
 
 Not only your functions, of course
@@ -536,15 +579,15 @@ Not only your functions, of course
 
 Package functions have (!) to communicate with the user (beyond the documentation)
 
-  - What is going? 
+  - What is going on? 
   - Why did something fail?
 
-Interface options
+Interface options to improve user feedback
 
   - Check conditions and use `message()`, `warning()`, `stop()` to inform the user
   - Write clear, helpful messages with advice how to solve an issue
   - Show progress updates and progress bars for long operations
-  - Catch and handle errors that might occur in complex dependencies (`try`, `?conditions`)
+  - Catch and handle errors that might occur in complex code (`try`, `?conditions`)
 
 ## Input argument validation
 
