@@ -472,8 +472,7 @@ myfunc <- function(..., na.rm = T) {
   if (!na.rm) {
     z <- Reduce(`+`, ell_args, init = 0)
   } else {
-    ell_args_without_na <- ell_args[!is.na(ell_args)]
-    z <- Reduce(`+`, ell_args_without_na, init = 0)
+    z <- Reduce(`%na0plus%`, ell_args, init = 0)
   }
   z <- return(z)
 }
@@ -492,7 +491,7 @@ A higher-order function is a function that does one of the following:
 - takes one or more functions as arguments
 - returns a function as its result
 
-R supports this, so functions are "first class citizens" in R.
+R supports this, so functions are "first class citizens" in R
 
 Why would one want to do this?
 
@@ -520,7 +519,7 @@ myfunc(c(1, 2, 3), sum) # 6
 Functions as a function's input and output
 
 ```r
-times_two <- function(x) { x*2 }
+times_two <- function(x) { x * 2 }
 ```
 
 ```r
@@ -554,18 +553,18 @@ General advice for using functions in scripts
 - Identify repeating code patterns in your script
 - If you do something **three or more** times, then it is worth putting it into a function
 - Cover small differences between patterns with function arguments
-- One function should only do one thing, but complete atomization decreases readability
+- Function length: One function should only do one thing, but complete atomization decreases readability
 
 ## Scripts and Packages
 
-In a package all code lives in functions, so workflows live in sequences of functions
+A script usually covers one workflow, but in a package all code lives in functions, so workflows live in sequences of functions
 
 ```r
 read_data("path/to/file") %>%
   mypackage::manipulate_data_A() %>%
   another_package::manipulate_data_B() %>%
   mypackage::manipulate_data_C() %>%
-  mypackage::plot_data_B()
+  mypackage::plot_data_D()
 ```
 
 Not only your functions, of course
@@ -574,15 +573,15 @@ Not only your functions, of course
 
 Package functions have (!) to communicate with the user (beyond the documentation)
 
-  - What is going? 
+  - What is going on? 
   - Why did something fail?
 
-Interface options
+Interface options to improve user feedback
 
   - Check conditions and use `message()`, `warning()`, `stop()` to inform the user
   - Write clear, helpful messages with advice how to solve an issue
   - Show progress updates and progress bars for long operations
-  - Catch and handle errors that might occur in complex dependencies (`try`, `?conditions`)
+  - Catch and handle errors that might occur in complex code (`try`, `?conditions`)
 
 ## Input argument validation
 
