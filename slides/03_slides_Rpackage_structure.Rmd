@@ -115,7 +115,7 @@ LazyData: true
 
 ## in DESCRIPTION
 
-add 
+manually add (or using `use_package()` leads to) 
 ```r
 Imports:
     dplyr (>= 0.2),
@@ -263,6 +263,7 @@ Congrats! Time to build using `devtools::build()`
 - `devtools::build(binary = FALSE)` --> tar.gz (should be usable by anyone)
 - `devtools::build(binary = TRUE)` --> platform specific (zip or tgz) to your own platform
 
+Using `devtools::install()` (re-)installs your package right away on your system and attaches it.
 
 # excercise
 
