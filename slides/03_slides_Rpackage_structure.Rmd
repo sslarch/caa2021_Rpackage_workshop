@@ -23,7 +23,7 @@ knitr::opts_chunk$set(eval = FALSE)
 
  - source =  directory of files with a specific structure
  - bundled = compressed into a single file (.tar.gz = "tarball")
- - binary = compressed in one file, platform specific (Mac: .tgz, Windows: .zip), used by install.packages()
+ - binary = compressed in one file, platform specific (Mac: .tgz, Windows: .zip), used by `install.packages()`
  - installed = binary package that’s been decompressed into a package library
  - in-memory = after library()
 
@@ -190,8 +190,8 @@ This path should not lead to your lib or anywhere near your installed packages!
 
 - now we have a package at the given path which contains the "most important parts": DESCRIPTION, R/, NAMESPACE
 
-- Rstudio users will notice Rbuildignore is being created and Rproj-files added to it
-- in buildignore we can add file names, that will be ignored when it's time to build the pkg
+- Rstudio users will notice .Rbuildignore is being created and Rproj-files added to it
+- in .Rbuildignore we can add file names, that will be ignored when it's time to build the pkg
 - using an R project makes the workflow a bit easier, but isn't necessary
 
 ## Tweaking workflow
@@ -217,6 +217,7 @@ This path should not lead to your lib or anywhere near your installed packages!
 load_all()
 ```
 
+- simulates the process of building, installing and attaching the package
 - load_all "sources" the script files safely for you
 - `source()` is not a good idea, because paths change during package development 
 - no need to :: your own package "under development"
@@ -245,14 +246,14 @@ load_all()
 
 ### 3 typical error messages and warnings
 - "there is no package" --> forgot to add a package to DESCRIPTION
--  "Undocumented code objects" --> forgot to add documentation
+- "Undocumented code objects" --> forgot to add documentation
 - "no visible binding for global variable a" --> happens when using dplyr
 ```{r}
 # option 1 (then you should also put utils in Imports)
-utils::globalVariables(c("a", "b"))
+utils::globalVariables(c("a"))
 
 # option 2
-a <- b <- NULL
+a <- NULL
 ```
 
 ## Build the package
@@ -268,6 +269,5 @@ Using `devtools::install()` (re-)installs your package right away on your system
 # excercise
 
 follow this tutorial:
-
 
 https://github.com/sslarch/caa2021_Rpackage_workshop/blob/main/exercises/exercise_build_package.Rmd
