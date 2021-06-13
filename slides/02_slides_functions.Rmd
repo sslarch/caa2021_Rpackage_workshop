@@ -23,8 +23,8 @@ Functions are code modules that perform a specific operation
 
 - Self-contained
     - Take in specific input and return output
-    - Runs in an own scope
-    - Black box: We don't have to understand them to use them
+    - Code in the function body runs in an own scope
+    - Black box: We don't have to understand a function to use it
 - Reusable
     - Can be called over and over again in different contexts
     - Can be made more or less generic
@@ -36,10 +36,10 @@ Functions are a major building block of software (R Packages)
 
 ## Functions in R
 
-R provides a several thousand functions in the core packages (base, graphics, stats, methods, ...)
+R provides several thousand functions in the core packages (base, graphics, stats, methods, ...)
 
 ```r
-base::mean(c(1,2,3))
+mean(c(1,2,3))
 ```
 
 More functions are distributed through packages in a large ecosystem (CRAN, Github, ...)
@@ -81,7 +81,7 @@ z <- x + y
 return(z)
 ```
 
-- Return value: `return(z)`
+- Return value: `z`
 
 ## Exercise
 
@@ -114,18 +114,24 @@ mymean(c(1,2,3,4))
 
 We can reduce the function definition: 
 
-Functions don't need an explicit return statement. The value of the last statement is returned
+Functions don't need an explicit return statement. The value of the last statement is automatically returned
 
 ```r
 myfunc <- function(x, y) { x + y }
 ```
 
-## Syntax
-
-Functions also do not need a name: Lambda functions
+For one-line function bodies we also don't need curly brackets
 
 ```r
-function(x, y) { x + y }
+myfunc <- function(x, y) x + y
+```
+
+## Syntax
+
+Functions do not need a name: Lambda functions
+
+```r
+function(x, y) x + y
 ```
 
 This is useful when we want to use a function only once for a very specific purpose (later: Higher Order functions)
@@ -134,8 +140,8 @@ This is useful when we want to use a function only once for a very specific purp
 myvec1 <- c(1,2,3)
 myvec2 <- c(5,6,7)
 Map(
-  f = function(x, y) { x + y },
-  myvec, myvec2
+  f = function(x, y) x + y,
+  myvec1, myvec2
 )
 ```
 
@@ -170,7 +176,7 @@ Even a function without output returns `NULL`
 myfunc <- function(x, y) { cat(x) }
 ```
 
-Usually the output of functions is immediatelly printed on the console. This can be prevented with `invisible` instead of `return`
+Usually the output of functions is immediately printed on the console. This can be prevented with `invisible` instead of `return`
 
 ```r
 myfunc <- function(x, y) {
@@ -181,13 +187,13 @@ myfunc <- function(x, y) {
 
 ## Types
 
-Every object in a programming environment has some type. R functions have no way to being explicit about this: Dynamic type system
+Every object in a programming environment has some type. But R functions have no way to being explicit about this: Dynamic type system
 
 ```r
 myfunc <- function(x, y) { x + y }
 ```
 
-We can use myfunc with every input the `+` operator is defined, so all kinds of numeric data types
+We can use myfunc with every input for which the `+` operator is defined, so all kinds of numeric data types
 
 ```r
 class(1.1) # "numeric"
@@ -219,19 +225,19 @@ myfunc("A", "B")
 
 Advantages of dynamic typing
 
-- less verbose function definition
-- very flexible functions (functions often automatically work for multiple input types)
+- less verbose function definition, because the types don't have to be named
+- potentially very flexible functions (functions often automatically work for multiple input types)
 
 Disadvantages
 
 - Nasty error messages: No explicit input validation
-- No type validation at "compile"-time
+- No type validation at "compile"-time: significant loss of robustness 
 
 ## Namespaces
 
 Functions we did not define ourself always exist in some package
 
-- For core R functions we can just access them
+- Core R functions can just be accessed directly
 
 ```r
 mean()
@@ -244,7 +250,7 @@ library(ggplot2)
 require(magrittr) # rarely used
 ```
 
-- Or we contextualize the function explictly
+- Or we contextualize the function explicitly with the `::` operator
 
 ```r
 dplyr::mutate()
@@ -255,13 +261,45 @@ c14bazAAR:::check_connection_to_url() # internal
 
 When developing a package, this becomes less convenient:
 
-All functions need to be explicitly called, except they come from base R
+All functions need to be explicitly called, except they come from the base package
 
 ```r
 stats::anova()
 ```
 
 Alternatively we could use the `importFrom` statement in the `NAMESPACE` file
+
+## Exercise
+
+Convert this function to a function that could exist in a package
+
+```r
+library(palmerpenguins)
+
+myfunc <- function() {
+  bm <- penguins$body_mass_g
+  bl <- penguins$bill_length_mm
+  plot(bm, bl)
+  pearson <- cor(bm, bl, use = "complete.obs")
+  text(x = 5500, y = 35, labels = pearson)
+}
+```
+
+## Exercise
+
+Convert this function to a function that could exist in a package
+
+Possible solution:
+
+```r
+myfunc <- function() {
+  bm <- palmerpenguins::penguins$body_mass_g
+  bl <- palmerpenguins::penguins$bill_length_mm
+  graphics::plot(bm, bl)
+  pearson <- stats::cor(bm, bl, use = "complete.obs")
+  graphics::text(x = 5500, y = 35, labels = pearson)
+}
+```
 
 # Advanced topics
 
