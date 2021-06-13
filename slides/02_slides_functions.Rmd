@@ -27,10 +27,10 @@ Functions are code modules that perform a specific operation
     - Black box: We don't have to understand a function to use it
 - Reusable
     - Can be called over and over again in different contexts
-    - Can be made more or less generic
-    - Can be made available to other developers
+    - Can be made more or less generic for more or less specific usecases
+    - Can be made available to other developers (via R Packages)
 
-Functions are a major building block of software (R Packages)
+Writing packages is mostly writing functions
 
 # Functions in R
 
@@ -73,7 +73,7 @@ myfunc <- function(x, y) {
 }
 ```
 - Function name: `myfunc`
-- Arguments: `x` and `x`
+- Input arguments: `x` and `y`
 - Function body:
 
 ```r
@@ -107,14 +107,14 @@ mymean <- function(x) {
 ```
 
 ```r
-mymean(c(1,2,3,4))
+mymean(c(1,2,3,4)) # 2.5
 ```
 
 ## Syntax
 
 We can reduce the function definition: 
 
-Functions don't need an explicit return statement. The value of the last statement is automatically returned
+Functions don't need an explicit `return` statement. The value of the last statement is automatically returned
 
 ```r
 myfunc <- function(x, y) { x + y }
@@ -128,7 +128,7 @@ myfunc <- function(x, y) x + y
 
 ## Syntax
 
-Functions do not need a name: Lambda functions
+Functions do not even need a name: Lambda functions
 
 ```r
 function(x, y) x + y
@@ -173,7 +173,8 @@ Each function has zero, one or multiple input arguments, but only exactly one ou
 Even a function without output returns `NULL`
 
 ```r
-myfunc <- function(x, y) { cat(x) }
+myfunc <- function(x, y) { message(x) }
+myfunc(1) # NULL
 ```
 
 Usually the output of functions is immediately printed on the console. This can be prevented with `invisible` instead of `return`
@@ -187,13 +188,13 @@ myfunc <- function(x, y) {
 
 ## Types
 
-Every object in a programming environment has some type. But R functions have no way to being explicit about this: Dynamic type system
+Every object in a programming environment has some type. But R functions have no way of being explicit about this: Dynamic type system
 
 ```r
 myfunc <- function(x, y) { x + y }
 ```
 
-We can use myfunc with every input for which the `+` operator is defined, so all kinds of numeric data types
+We can use `myfunc` with every input for which the `+` operator is defined, so all kinds of numeric data types
 
 ```r
 class(1.1) # "numeric"
@@ -227,15 +228,18 @@ Advantages of dynamic typing
 
 - less verbose function definition, because the types don't have to be named
 - potentially very flexible functions (functions often automatically work for multiple input types)
+- rapid prototyping
 
 Disadvantages
 
-- Nasty error messages: No explicit input validation
+- Nasty error messages for wrong input: No explicit input validation
 - No type validation at "compile"-time: significant loss of robustness 
+
+That's just the way R is designed
 
 ## Namespaces
 
-Functions we did not define ourself always exist in some package
+Functions we did not define ourself always come from some package
 
 - Core R functions can just be accessed directly
 
@@ -301,21 +305,23 @@ myfunc <- function() {
 }
 ```
 
+Package code is often more verbose than script code (lazy evaluation)
+
 # Advanced topics
 
 ## Infix operators
+
+Infix operators are special binary functions, so functions with two arguments, that can be written in between the function arguments
+
+```r
+3 + 5
+```
 
 R comes with a set of operators, some prefix, some infix, some postfix
 
 ```
 +, -, *, /, ^, &, |, :, ::, :::, $, =, <-, <<-, ==, 
 <, <=, >, >=, !=, ~, &&, ||, !, ?, @, :=, (, {, [, [[
-```
-
-Infix operators are special binary functions, so functions with two arguments, that can be written in between the function arguments
-
-```r
-3 + 5
 ```
 
 R allows you to write infix operators as normal functions and to define own infix operators
@@ -516,7 +522,7 @@ myfunc(c(1, 2, 3), sum) # 6
 
 ## Higher-order functions
 
-Functions as a function's input and output
+A function as a function's input and output
 
 ```r
 times_two <- function(x) { x * 2 }
