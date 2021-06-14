@@ -3,6 +3,11 @@
 This workshop by the [CAA–SIG Scientific Scripting Languages in Archaeology](https://sslarch.github.io) at [CAA2021, Cyprus](https://2021.caaconference.org) will offer a low-level introduction to R package development. The workshop is complementary to the session 
 [Tools for the Revolution: developing packages for scientific programming in archaeology](https://github.com/sslarch/caa2021_packages).
 
+## Feedback form
+
+Please, do leave us feedback in here: [https://forms.gle/MzTsMntBxtCCmge1A](https://forms.gle/MzTsMntBxtCCmge1A).
+(Or use the issues in this repo, whatever you prefer!)
+
 ## What we will do
 
 In this workshop we will focus on the main points in Hadley Wickham's book on package development ([Wickham 2020](https://r-pkgs.org)) and create an example application together. Workshop attendees will get to know a structured workflow, which will aid them in organizing their personal scripts afterwards. Main topics include function definition in R, the R package structure and the typical package development cycle. If time allows, we will also introduce topics like vignettes, unit tests or shipping data with packages.
