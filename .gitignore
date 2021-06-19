@@ -5,4 +5,5 @@
 
 # rendered output
 *.pdf
+!rendered_slides/*.pdf
 *.html
